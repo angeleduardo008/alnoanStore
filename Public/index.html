@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALNOAN</title>
+    <meta
+      name="description"
+      content="Descubre nuestra colección exclusiva de mochilas Alnoan. Diseño, calidad y funcionalidad para tu día a día."
+    />
+    <link rel="stylesheet" href="Css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css.css">
+    <link rel="preload" href="img/categories/women-preview.jpg" as="image">
+    <link rel="preload" href="img/categories/men-preview.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Barra de navegación premium -->
+    <nav class="navbar">
+      <!-- Logo con efecto hover -->
+      <a href="index.html" class="logo">
+          <span>ALNOAN</span>
+          <div class="logo-hover"></div>
+      </a>
+      
+      <!-- Contenedor de acciones -->
+      <div class="nav-actions">
+          <!-- Buscador mejorado -->
+          <div class="search-container">
+              <button id="search-toggle" class="nav-icon" aria-label="Buscar">
+                  <i class="fas fa-search"></i>
+              </button>
+              <div class="search-box">
+                  <input type="text" placeholder="Buscar productos..." id="search-input">
+                  <button class="search-btn" aria-label="Ejecutar búsqueda">
+                      <i class="fas fa-search"></i>
+                  </button>
+                  <div class="search-suggestions"></div>
+              </div>
+          </div>
+          
+          <!-- Menú de usuario con avatar -->
+          <div class="user-dropdown">
+              <button class="nav-icon user-btn" aria-label="Menú de usuario">
+                  <div class="user-avatar">
+                      <i class="fas fa-user"></i>
+                  </div>
+              </button>
+              <div class="dropdown-content">
+                  <div class="user-info">
+                      <div class="user-avatar"><i class="fas fa-user"></i></div>
+                      <div>
+                          <div class="user-name">Invitado</div>
+                          <div class="user-email">Inicia sesión</div>
+                      </div>
+                  </div>
+                  <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                  <a href="#"><i class="fas fa-clipboard-list"></i> Mis pedidos</a>
+                  <a href="#"><i class="fas fa-heart"></i> Favoritos</a>
+                  <a href="#"><i class="fas fa-history"></i> Historial</a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+              </div>
+          </div>
+          
+          <!-- Carrito con notificación -->
+          <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
+              <div class="cart-badge">
+                  <i class="fas fa-shopping-cart"></i>
+                  <span class="cart-count">0</span>
+              </div>
+          </a>
+          
+          <!-- Botón de menú mejorado -->
+          <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal">
+              <div class="menu-icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+              <span class="menu-text">Menú</span>
+          </button>
+      </div>
+  </nav>
+  <!-- Menú de categorías mejorado -->
+  <div class="categories-menu" id="categories-menu">
+    <div class="menu-header">
+        <button class="back-btn" id="back-btn" aria-label="Volver">
+            <i class="fas fa-chevron-left"></i>
+            <span>Volver</span>
+        </button>
+        <h3 id="menu-title">Categorías</h3>
+        <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="menu-content">
+        <!-- Nivel 1: Categorías principales -->
+        <div class="menu-level active" id="level-1">
+            <ul>
+                <li data-category="mujer" data-preview="img/categories/women-preview.jpg">
+                    <a href="#">
+                        <i class="fas fa-female category-icon"></i>
+                        <span>Mujer</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li data-category="hombre" data-preview="img/categories/men-preview.jpg">
+                    <a href="#">
+                        <i class="fas fa-male category-icon"></i>
+                        <span>Hombre</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li data-category="ninos">
+                    <a href="#">
+                        <i class="fas fa-child category-icon"></i>
+                        <span>Niños</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li data-category="ninas">
+                    <a href="#">
+                        <i class="fas fa-child-dress category-icon"></i>
+                        <span>Niñas</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li data-category="adolescentes">
+                    <a href="#">
+                        <i class="fas fa-tshirt category-icon"></i>
+                        <span>Adolescentes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Nivel 2: Subcategorías -->
+        <div class="menu-level" id="level-2">
+            <ul id="subcategories-list">
+                <!-- Se llena dinámicamente -->
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Vista previa para desktop -->
+    <div class="category-preview" id="category-preview"></div>
+</div>
+
+<!-- Overlay para el menú -->
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<!-- Audio para efectos (oculto) -->
+<audio id="click-sound" src="sounds/click.mp3" preload="auto"></audio>
+    <!-- Barra de navegación -->
+    <!-- <nav class="navbar">
+      <div class="logo">ALNOAN</div>
+      <button id="menu-toggle" class="icon mobile-only">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li>
+          <a href="#"><i class="fas fa-home"></i> Inicio</a>
+        </li>
+        <li>
+          <a href="#servicios"
+            ><i class="fas fa-concierge-bell"></i> Servicios</a
+          >
+        </li>
+        <li>
+          <a href="catalogo.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+        </li>
+        <li>
+          <a href="#testimonios"><i class="fas fa-comment"></i> Testimonios</a>
+        </li>
+        <li>
+          <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a href="carrito.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" style="display: none;">0</span>
+        </a>
+      </div>
+      <div class="search-container">
+        <button id="search-toggle" class="icon">
+            <i class="fas fa-search"></i>
+        </button>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar productos...">
+            <button id="search-button" class="icon">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    </nav> -->
+    <!-- Modal para la notificación del modo oscuro -->
+    <!-- Banner de cookies -->
+    <!-- Banner principal -->
+    <header class="banner">
+      <div class="banner-content">
+        <h1>Colección de Mochilas 2025</h1>
+        <p>Descubre la elegancia y el estilo único de Alnoan</p>
+        <div class="banner-buttons">
+          <a href="#productos" class="btn btn-large"
+            >Comprar Ahora <i class="fas fa-arrow-right"></i
+          ></a>
+          <a href="catalogo.html" class="btn btn-outline btn-large"
+            target="_blank">Ver Colección</a
+          >
+        </div>
+      </div>
+      <div class="banner-scroll">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <!-- Sección de servicios -->
+    <section id="servicios" class="services">
+      <div class="section-header">
+        <h2><i class="fas fa-award"></i> Nuestros Servicios</h2>
+        <p>Lo que nos diferencia de la competencia</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Envío Rápido</h3>
+          <p>Recibe tu pedido en 24 solo pucallpa</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Garantía</h3>
+          <p>6 meses de garantía en todos nuestros productos</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <h3>Devoluciones Fáciles</h3>
+          <p>
+            10 -15 días para cambiar o devolver tu producto, solo si hay errores
+            de fabrica
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>Soporte 24/7</h3>
+          <p>Nuestro equipo está siempre disponible para ayudarte</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de productos -->
+    <section id="productos" class="products">
+      <div class="section-header">
+        <h2><i class="fas fa-star"></i> Productos Destacados</h2>
+        <p>Nuestras mochilas más populares</p>
+      </div>
+      <div class="product-grid">
+        <!-- Mochila Clásica -->
+        <div class="product-card" data-product-id="1">
+          <div class="product-badge">Nuevo</div>
+          <img
+            src="Img/mochila 3.jpeg"
+            alt="Mochila Clasica"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3>Mochila Clasica</h3>
+            <div class="product-meta">
+              <span class="price"><i class="fas fa-tag"></i> S/.120</span>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(24)</span>
+              </div>
+            </div>
+            <p class="product-description">
+              Mochila de cuero genuino con capacidad de 15L, ideal para el día a
+              día.
+            </p>
+            <div class="product-actions">
+              <button class="add-to-cart" data-product-id="1">Añadir</button>
+                <i class="fas fa-cart-plus"></i> Añadir
+              </button>
+              <button class="quick-view"><i class="fas fa-eye"></i></button>
+              <button class="add-to-wishlist">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mochila Normal -->
+        <div class="product-card" data-product-id="2">
+          <div class="product-badge">Más vendido</div>
+          <img
+            src="Img/mochila 2.jpeg"
+            alt="Mochila Normal"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3>Mochila Normal</h3>
+            <div class="product-meta">
+              <span class="price"><i class="fas fa-tag"></i> S/.90</span>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(36)</span>
+              </div>
+            </div>
+            <p class="product-description">
+              Mochila versátil de poliéster resistente con capacidad de 20L.
+            </p>
+            <div class="product-actions">
+              <button class="add-to-cart" data-product-id="2">Añadir</button>
+                <i class="fas fa-cart-plus"></i> Añadir
+              </button>
+              <button class="quick-view"><i class="fas fa-eye"></i></button>
+              <button class="add-to-wishlist">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mochila Elegante -->
+        <div class="product-card" data-product-id="3">
+          <div class="product-badge">Oferta</div>
+          <img
+            src="Img/mochila 3.jpeg"
+            alt="Mochila Elegante"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3>Mochila Elegante</h3>
+            <div class="product-meta">
+              <span class="price"
+                ><i class="fas fa-tag"></i> S/.100
+                <span class="old-price">S/.120</span></span
+              >
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(18)</span>
+              </div>
+            </div>
+            <p class="product-description">
+              Mochila elegante de cuero sintético premium con capacidad de 12L.
+            </p>
+            <div class="product-actions">
+              <button class="add-to-cart" data-product-id="3">Añadir</button>
+                <i class="fas fa-cart-plus"></i> Añadir
+              </button>
+              <button class="quick-view"><i class="fas fa-eye"></i></button>
+              <button class="add-to-wishlist">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer">
+        <a href="#" class="btn"
+          >Ver todos los productos <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </section>
+
+    <!-- Sección de testimonios -->
+    <section id="testimonios" class="testimonials">
+      <div class="section-header">
+        <h2>
+          <i class="fas fa-comment-alt"></i> Lo que dicen nuestros clientes
+        </h2>
+        <p>Experiencias reales con productos ALNOAN</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "La mochila clásica es una mochila de calidad, porque no me gusta
+              comprar mohchilas que se desgasten a la semana, esta a buen
+              precio, recomendado."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="Img/axl.jpeg" alt="Axel Quevedo" />
+            <div>
+              <h4>Axel Quevedo</h4>
+              <span>pucallpa, Perú</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>
+              "Compré la mochila elegante, por que me parecio muy bonita y
+              sofisticada para ocaciones elegantes."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="Img/daniela.jpeg" alt="Daniela Trujillo" />
+            <div>
+              <h4>Daniela Trujillo</h4>
+              <span>pucallpa, Perú</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Excelente relación calidad-precio. La mochila normal es perfecta
+              para la universidad, resiste todos mis libros y el diseño es muy
+              cómodo para caminar largas distancias."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="Img/alanis.jpeg" alt="Alanis Estrella" />
+            <div>
+              <h4>Alanis Estrella</h4>
+              <span>Pucallpa, Perú</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección "Sobre nosotros" -->
+    <section class="about">
+      <div class="about-content">
+        <div class="about-text">
+          <div class="section-header">
+            <h2><i class="fas fa-info-circle"></i> Sobre ALNOAN</h2>
+            <p>Nuestra historia y compromiso con la calidad</p>
+          </div>
+          <p>
+            ALNOAN se ha dedicado a vender mochilas que combinan estilo,
+            funcionalidad y durabilidad. Nuestra misión es ofrecer productos de
+            calidad que acompañen tus aventuras diarias.
+          </p>
+          <ul class="about-features">
+            <li>
+              <i class="fas fa-check-circle"></i> Materiales de primera calidad
+              seleccionados cuidadosamente
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Diseños únicos y modernos
+              creados por nuestro equipo
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Garantía de satisfacción del
+              100%
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Envíos rápidos a todo el Perú
+            </li>
+          </ul>
+          <a href="#" class="btn btn-outline"
+            >Conoce nuestra historia <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="about-image">
+          <img src="Img/logo alnoan.png" alt="Equipo ALNOAN" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de contacto -->
+    <section id="contacto" class="contact">
+      <div class="section-header">
+        <h2><i class="fas fa-envelope"></i> Contáctanos</h2>
+        <p>Estamos aquí para ayudarte</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Información de contacto</h3>
+          <ul>
+            <li><i class="fas fa-phone"></i> +51 979 532 699</li>
+            <li><i class="fas fa-envelope"></i> alnoanof@gmail.com</li>
+            <li><i class="fas fa-clock"></i> Abierto las 24 hrs del dia</li>
+          </ul>
+          <div class="social-media">
+            <h3>Síguenos</h3>
+            <div class="social-icons">
+              <a
+                href="https://www.facebook.com/share/1BYCo4hQdS/"
+                target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/alnoan_of?igsh=MWt1cGYzZHQyMHQ2YQ=="
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href="https://x.com/AlnoanOf?t=SuhqnyzOIuFDUUirZb_yww&s=09"
+                target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://wa.me/+51979532699" target="_blank"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                placeholder="Nombre completo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                id="email"
+                placeholder="Correo electrónico"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input type="tel" id="phone" placeholder="Teléfono (opcional)" />
+            </div>
+            <div class="form-group">
+              <textarea
+                id="message"
+                rows="5"
+                placeholder="Tu mensaje"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn">
+              Enviar mensaje <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ALNOAN</h3>
+          <p>Mochilas con estilo y calidad para tu día a día.</p>
+          <div class="newsletter">
+            <h4>Suscríbete a nuestro newsletter</h4>
+            <form class="newsletter-form">
+              <input
+                type="email"
+                placeholder="Tu correo electrónico"
+                required
+              />
+              <button type="submit">
+                Suscribirse <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Enlaces rápidos</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i> Inicio</a>
+            </li>
+            <li>
+              <a href="#productos"
+                ><i class="fas fa-chevron-right"></i> Productos</a
+              >
+            </li>
+            <li>
+              <a href="#servicios"
+                ><i class="fas fa-chevron-right"></i> Servicios</a
+              >
+            </li>
+            <li>
+              <a href="#testimonios"
+                ><i class="fas fa-chevron-right"></i> Testimonios</a
+              >
+            </li>
+            <li>
+              <a href="#contacto"
+                ><i class="fas fa-chevron-right"></i> Contacto</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Información</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="politica-de-privacidad.html" target="_blank"><i class="fas fa-chevron-right"></i> Politica de privacidad</a
+              >
+            </li>
+            <li>
+              <a href="terminos-y-condiciones.html"
+                target="_blank"><i class="fas fa-chevron-right"></i> Términos y condiciones</a
+              >
+            </li>
+            <li>
+              <a href="aviso-legal.html"
+                target="_blank"><i class="fas fa-chevron-right"></i> Aviso legal</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          <i class="far fa-copyright"></i> 2025 Alnoan. Todos los derechos
+          reservados.
+        </p>
+        <div class="payment-methods">
+          <img src="Img/visa.png" alt="Visa" width="60" height="60" />
+          <img src="Img/yape.png" alt="Yape" width="60" height="60" />
+          <img src="Img/plin.png" alt="Plin" width="60" height="60" />
+        </div>
+      </div>
+    </footer>
+
+    <!-- Botón de WhatsApp -->
+    <a
+      href="https://wa.me/+51979532699"
+      class="whatsapp-button"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Botón para volver arriba -->
+    <button id="back-to-top" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="Js/script.js"></script>
+  </body>
+</html>

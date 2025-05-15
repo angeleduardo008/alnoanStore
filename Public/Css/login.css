@@ -1,0 +1,209 @@
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('../Img/login-alnoan\ \(1\).jpg') center/cover no-repeat fixed;
+        }
+        
+        /* Contenedor principal */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Encabezado */
+        .logo {
+            color: #6E77EE;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            color: #555;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 1.05rem;
+        }
+        
+        /* Divisor */
+        .divider {
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin: 28px 0;
+        }
+        
+        /* Formulario */
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #6E77EE;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(110, 119, 238, 0.2);
+        }
+        
+        /* Opciones */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 22px 0;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+            accent-color: #6E77EE;
+        }
+        
+        .forgot-password {
+            color: #6E77EE;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        /* Botón */
+        .login-btn {
+            width: 100%;
+            background-color: #6E77EE;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 0 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: #5b63d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 119, 238, 0.3);
+        }
+        
+        /* Login social */
+        .social-login {
+            text-align: center;
+            margin: 28px 0;
+            color: #666;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        
+        .social-login::before {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 18px;
+        }
+        
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+        }
+        
+        /* Enlace de registro */
+        .register-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+        
+        .register-link a {
+            color: #6E77EE;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 25px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            body {
+                padding: 15px;
+                background-attachment: scroll;
+            }
+        }

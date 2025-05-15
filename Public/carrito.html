@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito de Compras</title>
+    <link rel="stylesheet" href="Css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart"></i> Tu Carrito <span class="item-count">(2 productos)</span></h1>
+            <a href="/" class="continue-shopping"><i class="fas fa-arrow-left"></i> Continuar comprando</a>
+        </div>
+        
+        <div class="cart-content">
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/80x80?text=iPhone+15" alt="iPhone 15" class="product-image">
+                    <div class="product-details">
+                        <h3>iPhone 15</h3>
+                        <p class="product-variant"><i class="fas fa-palette"></i> Color: Negro</p>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-price">$999.00</div>
+                    <button class="remove-item"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/80x80?text=AirPods+Pro" alt="AirPods Pro" class="product-image">
+                    <div class="product-details">
+                        <h3>AirPods Pro</h3>
+                        <p class="product-variant"><i class="fas fa-palette"></i> Color: Blanco</p>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-price">$249.00</div>
+                    <button class="remove-item"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <h3><i class="fas fa-receipt"></i> Resumen de compra</h3>
+                <div class="discount-section">
+                    <input type="text" placeholder="Ingresa código de descuento">
+                    <button class="apply-btn">Aplicar</button>
+                </div>
+                
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Subtotal (2 productos)</span>
+                        <span>$1,248.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Descuento</span>
+                        <span class="discount-value">$0.00</span>
+                    </div>
+                    <div class="summary-row shipping">
+                        <span>Envío</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span class="total-value">$1,253.00</span>
+                    </div>
+                </div>
+                
+                <button class="checkout-btn"><i class="fas fa-lock"></i> Pagar ahora</button>
+                
+                <div class="payment-methods">
+                    <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard">
+                    <img src="https://via.placeholder.com/40x25?text=AMEX" alt="American Express">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal">
+                </div>
+                
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i> Compra segura - Tus datos están protegidos
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h3><i class="fas fa-lightbulb"></i> También te puede interesar</h3>
+            <div class="recommended-products">
+                <div class="product">
+                    <img src="https://via.placeholder.com/100x100?text=Cargador" alt="Cargador">
+                    <p>Cargador USB-C</p>
+                    <span>$29.99</span>
+                    <button>Añadir</button>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/100x100?text=Fundas" alt="Fundas">
+                    <p>Funda para iPhone 15</p>
+                    <span>$19.99</span>
+                    <button>Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="Js/carrito.js"></script>
+</body>
+</html>

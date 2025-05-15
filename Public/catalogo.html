@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de mochilas ALNOAN - Colección exclusiva 2025">
+    <title>Catálogo de Mochilas | ALNOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Css/catalogo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+     <!-- Barra de navegación premium -->
+     <nav class="navbar">
+        <!-- Logo con efecto hover -->
+        <a href="index.html" class="logo">
+            <span>ALNOAN</span>
+            <div class="logo-hover"></div>
+        </a>
+        
+        <!-- Contenedor de acciones -->
+        <div class="nav-actions">
+            <!-- Buscador mejorado -->
+            <div class="search-container">
+                <button id="search-toggle" class="nav-icon" aria-label="Buscar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar productos..." id="search-input">
+                    <button class="search-btn" aria-label="Ejecutar búsqueda">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-suggestions"></div>
+                </div>
+            </div>
+            
+            <!-- Menú de usuario con avatar -->
+            <div class="user-dropdown">
+                <button class="nav-icon user-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </button>
+                <div class="dropdown-content">
+                    <div class="user-info">
+                        <div class="user-avatar"><i class="fas fa-user"></i></div>
+                        <div>
+                            <div class="user-name">Invitado</div>
+                            <div class="user-email">Inicia sesión</div>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                    <a href="#"><i class="fas fa-clipboard-list"></i> Mis pedidos</a>
+                    <a href="#"><i class="fas fa-heart"></i> Favoritos</a>
+                    <a href="#"><i class="fas fa-history"></i> Historial</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                </div>
+            </div>
+            
+            <!-- Carrito con notificación -->
+            <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
+                <div class="cart-badge">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </a>
+            
+            <!-- Botón de menú mejorado -->
+            <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="menu-text">Menú</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Menú de categorías mejorado -->
+    <div class="categories-menu" id="categories-menu">
+        <div class="menu-header">
+            <button class="back-btn" id="back-btn" aria-label="Volver">
+                <i class="fas fa-chevron-left"></i>
+                <span>Volver</span>
+            </button>
+            <h3 id="menu-title">Categorías</h3>
+            <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="menu-content">
+            <!-- Nivel 1: Categorías principales -->
+            <div class="menu-level active" id="level-1">
+                <ul>
+                    <li data-category="mujer" data-preview="img/categories/women-preview.jpg">
+                        <a href="#">
+                            <i class="fas fa-female category-icon"></i>
+                            <span>Mujer</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="hombre" data-preview="img/categories/men-preview.jpg">
+                        <a href="#">
+                            <i class="fas fa-male category-icon"></i>
+                            <span>Hombre</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninos">
+                        <a href="#">
+                            <i class="fas fa-child category-icon"></i>
+                            <span>Niños</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninas">
+                        <a href="#">
+                            <i class="fas fa-child-dress category-icon"></i>
+                            <span>Niñas</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="adolescentes">
+                        <a href="#">
+                            <i class="fas fa-tshirt category-icon"></i>
+                            <span>Adolescentes</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Nivel 2: Subcategorías -->
+            <div class="menu-level" id="level-2">
+                <ul id="subcategories-list">
+                    <!-- Se llena dinámicamente -->
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Vista previa para desktop -->
+        <div class="category-preview" id="category-preview"></div>
+    </div>
+    
+    <!-- Overlay para el menú -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <!-- Header del catálogo -->
+    <header class="catalog-header">
+        <h1>Catálogo de Mochilas</h1>
+        <p>Descubre nuestra colección exclusiva 2025</p>
+    </header>
+    
+    <!-- Filtros de búsqueda -->
+    <div class="filters">
+        <div class="filter-group">
+            <label for="category"><i class="fas fa-filter"></i> Categoría</label>
+            <select id="category">
+                <option value="">Todas las categorías</option>
+                <option value="Niños">Niños</option>
+                <option value="Adolescentes">Adolescentes</option>
+                <option value="Adultos">Adultos</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="price"><i class="fas fa-tag"></i> Precio</label>
+            <select id="price">
+                <option value="">Todos los precios</option>
+                <option value="0-100">S/ 0 - 100</option>
+                <option value="100-200">S/ 100 - 200</option>
+                <option value="200+">S/ 200+</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="search"><i class="fas fa-search"></i> Buscar</label>
+            <input type="text" id="search" placeholder="Buscar mochilas...">
+        </div>
+    </div>
+    
+    <!-- Grid de productos -->
+    <div class="products-grid">
+        <!-- Producto 1 -->
+        <div class="product-card">
+            <img src="Img/mochila 3.jpeg" alt="Mochila clásica ALNOAN" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Mochila clásica</h3>
+                <div class="product-price">S/ 120.00</div>
+                <div class="product-actions">
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Comprar</button>
+                    <button class="btn btn-secondary"><i class="far fa-heart"></i> Favorito</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Producto 2 -->
+        <div class="product-card">
+            <img src="Img/mochila 2.jpeg" alt="Mochila normal ALNOAN" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Mochila Normal</h3>
+                <div class="product-price">S/ 90.00</div>
+                <div class="product-actions">
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Comprar</button>
+                    <button class="btn btn-secondary"><i class="far fa-heart"></i> Favorito</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Producto 3 -->
+        <div class="product-card">
+            <img src="Img/mochila 3.jpeg" alt="Mochila elegante ALNOAN" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Mochila Elegante</h3>
+                <div class="product-price">S/ 100.00</div>
+                <div class="product-actions">
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Comprar</button>
+                    <button class="btn btn-secondary"><i class="far fa-heart"></i> Favorito</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Puedes agregar más productos siguiendo el mismo patrón -->
+    </div>
+    
+    <!-- Paginación -->
+    <div class="pagination">
+        <a href="#" class="page-link"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+    </div>
+
+    <script src="Js/catalogo.js"></script>
+</body>
+</html>

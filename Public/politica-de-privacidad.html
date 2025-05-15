@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad | ALNOAN</title>
+    <style>
+ /* Variables con la paleta de colores */
+:root {
+    --cool-gray: #B7BAC3;
+    --platinum: #E4E4E4;
+    --ghost-white: #F9FAF5;
+    --medium-slate-blue: #6E77EE;
+    --dark: #2c3e50;
+    --light: #ffffff;
+    --text: #333333;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    --border-radius: 8px;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--ghost-white);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 70px;
+}
+
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    background-color: var(--light);
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    padding: 0.5rem 2rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--medium-slate-blue);
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.logo span {
+    position: relative;
+    z-index: 2;
+}
+
+.logo-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--medium-slate-blue);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.logo:hover .logo-hover {
+    width: 100%;
+}
+
+/* Contenedor de acciones */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+/* Iconos de navegación */
+.nav-icon {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: var(--transition);
+    padding: 0.6rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.nav-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--medium-slate-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.nav-icon:hover {
+    color: var(--medium-slate-blue);
+    background-color: var(--ghost-white);
+}
+
+.nav-icon:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Buscador mejorado */
+.search-container {
+    position: relative;
+}
+
+.search-box {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 300px;
+    background: var(--light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: none;
+    z-index: 1001;
+    transform-origin: top right;
+    animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.search-box.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--platinum);
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.search-box input:focus {
+    border-color: var(--medium-slate-blue);
+}
+
+.search-btn {
+    background: var(--medium-slate-blue);
+    color: white;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-btn:hover {
+    background: var(--cool-gray);
+}
+
+.search-suggestions {
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.suggestion-item {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--platinum);
+}
+
+.suggestion-item:hover {
+    background: var(--ghost-white);
+    color: var(--medium-slate-blue);
+}
+
+.suggestion-header {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+    color: var(--cool-gray);
+    border-bottom: 1px solid var(--platinum);
+    background: var(--ghost-white);
+}
+
+/* Menú desplegable de usuario */
+.user-dropdown {
+    position: relative;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--platinum);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--medium-slate-blue);
+    transition: var(--transition);
+}
+
+.user-btn:hover .user-avatar {
+    background-color: var(--medium-slate-blue);
+    color: white;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: var(--light);
+    width: 220px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: none;
+    z-index: 1001;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: var(--ghost-white);
+    color: var(--medium-slate-blue);
+}
+
+.dropdown-content a i {
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--platinum);
+    margin: 0.5rem 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+    background: var(--ghost-white);
+    margin: -8px -8px 5px -8px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-email {
+    font-size: 0.8rem;
+    color: var(--cool-gray);
+}
+
+/* Carrito */
+.cart-badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--medium-slate-blue);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+@keyframes cartBounce {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(0.9); }
+}
+
+.cart-badge.added {
+    animation: cartBounce 0.6s ease;
+}
+
+/* Botón de menú mejorado */
+.menu-btn {
+    margin-left: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.menu-btn:hover {
+    background-color: var(--ghost-white);
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20px;
+    height: 16px;
+    margin-right: 0.5rem;
+}
+
+.menu-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text);
+    transition: var(--transition);
+}
+
+.menu-btn:hover .menu-icon span {
+    background-color: var(--medium-slate-blue);
+}
+
+.menu-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Menú de categorías */
+.categories-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 90%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--light);
+    z-index: 1002;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.categories-menu.active {
+    left: 0;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--platinum);
+    background: var(--ghost-white);
+}
+
+.menu-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--medium-slate-blue);
+    font-weight: 600;
+}
+
+.menu-header button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.menu-header button:hover {
+    color: var(--medium-slate-blue);
+}
+
+.menu-content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+.menu-level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    overflow-y: auto;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+}
+
+.menu-level.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.menu-level ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-level li {
+    margin-bottom: 0.3rem;
+}
+
+.menu-level a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.menu-level a:hover {
+    background-color: var(--ghost-white);
+    color: var(--medium-slate-blue);
+    transform: translateX(5px);
+}
+
+.category-icon {
+    margin-right: 0.8rem;
+    color: var(--medium-slate-blue);
+    width: 20px;
+    text-align: center;
+}
+
+.category-preview {
+    display: none;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.category-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    display: none;
+    backdrop-filter: blur(3px);
+}
+
+.menu-overlay.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Cart floater */
+.cart-floater {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 9999;
+    transform: translateX(150%);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 300px;
+}
+
+.cart-floater.show {
+    transform: translateX(0);
+}
+
+.cart-floater img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    font-weight: bold;
+    color: var(--medium-slate-blue);
+    margin-top: 5px;
+}
+
+/* Efecto ripple */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(110, 119, 238, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+        /* Contenido Legal Mejorado */
+        .legal-super-container {
+            perspective: 1000px;
+            padding-bottom: 50px;
+        }
+        
+        .legal-master-wrapper {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(249,250,245,0.96) 100%);
+            box-shadow: 
+                0 30px 60px -10px rgba(0, 0, 0, 0.1),
+                0 18px 36px -18px rgba(0, 0, 0, 0.15);
+            max-width: 1100px;
+            margin: 30px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(183, 186, 195, 0.15);
+        }
+        
+        .legal-master-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                var(--medium-slate-blue) 0%, 
+                #8E94F5 50%, 
+                var(--medium-slate-blue) 100%);
+            z-index: 2;
+        }
+        
+        .legal-header {
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgxMTAsMTE5LDIzOCwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+            padding: 80px 40px 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .legal-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--medium-slate-blue);
+            border-radius: 3px;
+        }
+        
+        .legal-header h1 {
+            font-weight: 600;
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: -0.5px;
+            color: var(--rich-black);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .legal-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--medium-slate-blue);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .legal-header:hover h1::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .legal-header p {
+            font-weight: 450;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 25px auto 0;
+            color: rgba(10, 10, 10, 0.7);
+        }
+        
+        .legal-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            padding: 60px;
+        }
+        
+        @media (max-width: 1024px) {
+            .legal-grid-container {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                gap: 40px;
+            }
+            
+            .legal-header {
+                padding: 60px 30px 50px;
+            }
+            
+            .legal-header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .navbar-premium {
+                padding: 15px 25px;
+            }
+        }
+        
+        .legal-article {
+            position: relative;
+            counter-increment: section-counter;
+            padding-left: 30px;
+        }
+        
+        .legal-article::before {
+            content: counter(section-counter, decimal-leading-zero);
+            position: absolute;
+            left: -15px;
+            top: -5px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--medium-slate-blue);
+            opacity: 0.7;
+        }
+        
+        .legal-article h2 {
+            color: var(--rich-black);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .legal-article h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background: var(--medium-slate-blue);
+            transition: var(--transition);
+        }
+        
+        .legal-article:hover h2::after {
+            width: 80px;
+        }
+        
+        .legal-article p {
+            font-size: 1rem;
+            margin: 0 0 25px 0;
+            color: rgba(10, 10, 10, 0.8);
+        }
+        
+        .legal-article p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .legal-article strong {
+            color: var(--rich-black);
+            font-weight: 600;
+        }
+        
+        /* Footer Premium Mejorado */
+        .footer-premium {
+            background: linear-gradient(to right, 
+                rgba(110, 119, 238, 0.1) 0%, 
+                rgba(183, 186, 195, 0.08) 50%, 
+                rgba(110, 119, 238, 0.1) 100%);
+            padding: 40px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(183, 186, 195, 0.2);
+        }
+        
+        .footer-content-premium {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-premium p {
+            margin: 0 0 20px 0;
+            font-size: 0.9rem;
+            color: rgba(10, 10, 10, 0.7);
+        }
+        
+        .social-icons-premium {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icon-premium {
+            color: var(--rich-black);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-icon-premium:hover {
+            color: var(--medium-slate-blue);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links-premium {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-link-premium {
+            color: var(--rich-black);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .footer-link-premium::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--medium-slate-blue);
+            transition: var(--transition);
+        }
+        
+        .footer-link-premium:hover::after {
+            width: 100%;
+        }
+        
+        /* Efectos avanzados */
+        .legal-article {
+            transition: var(--transition);
+            transform-origin: top center;
+        }
+        
+        .legal-article:hover {
+            transform: translateY(-5px);
+        }
+        
+        .legal-master-wrapper:hover {
+            transform: translateY(-5px) rotateX(0.5deg) rotateY(0.5deg);
+            box-shadow: 
+                0 40px 80px -15px rgba(0, 0, 0, 0.15),
+                0 25px 50px -25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Animación sutil al cargar */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .legal-master-wrapper {
+            animation: fadeInUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+        
+        .legal-article {
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+        
+        .legal-article:nth-child(1) { animation-delay: 0.2s; }
+        .legal-article:nth-child(2) { animation-delay: 0.3s; }
+        .legal-article:nth-child(3) { animation-delay: 0.4s; }
+        .legal-article:nth-child(4) { animation-delay: 0.5s; }
+        .legal-article:nth-child(5) { animation-delay: 0.6s; }
+        .legal-article:nth-child(6) { animation-delay: 0.7s; }
+    </style>
+    <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Barra de navegación premium -->
+    <nav class="navbar">
+        <!-- Logo con efecto hover -->
+        <a href="index.html" class="logo">
+            <span>ALNOAN</span>
+            <div class="logo-hover"></div>
+        </a>
+        
+        <!-- Contenedor de acciones -->
+        <div class="nav-actions">
+            <!-- Buscador mejorado -->
+            <div class="search-container">
+                <button id="search-toggle" class="nav-icon" aria-label="Buscar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar productos..." id="search-input">
+                    <button class="search-btn" aria-label="Ejecutar búsqueda">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-suggestions"></div>
+                </div>
+            </div>
+            
+            <!-- Menú de usuario con avatar -->
+            <div class="user-dropdown">
+                <button class="nav-icon user-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </button>
+                <div class="dropdown-content">
+                    <div class="user-info">
+                        <div class="user-avatar"><i class="fas fa-user"></i></div>
+                        <div>
+                            <div class="user-name">Invitado</div>
+                            <div class="user-email">Inicia sesión</div>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                    <a href="#"><i class="fas fa-clipboard-list"></i> Mis pedidos</a>
+                    <a href="#"><i class="fas fa-heart"></i> Favoritos</a>
+                    <a href="#"><i class="fas fa-history"></i> Historial</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                </div>
+            </div>
+            
+            <!-- Carrito con notificación -->
+            <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
+                <div class="cart-badge">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </a>
+            
+            <!-- Botón de menú mejorado -->
+            <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="menu-text">Menú</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Menú de categorías mejorado -->
+    <div class="categories-menu" id="categories-menu">
+        <div class="menu-header">
+            <button class="back-btn" id="back-btn" aria-label="Volver">
+                <i class="fas fa-chevron-left"></i>
+                <span>Volver</span>
+            </button>
+            <h3 id="menu-title">Categorías</h3>
+            <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="menu-content">
+            <!-- Nivel 1: Categorías principales -->
+            <div class="menu-level active" id="level-1">
+                <ul>
+                    <li data-category="mujer" data-preview="img/categories/women-preview.jpg">
+                        <a href="#">
+                            <i class="fas fa-female category-icon"></i>
+                            <span>Mujer</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="hombre" data-preview="img/categories/men-preview.jpg">
+                        <a href="#">
+                            <i class="fas fa-male category-icon"></i>
+                            <span>Hombre</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninos">
+                        <a href="#">
+                            <i class="fas fa-child category-icon"></i>
+                            <span>Niños</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninas">
+                        <a href="#">
+                            <i class="fas fa-child-dress category-icon"></i>
+                            <span>Niñas</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li data-category="adolescentes">
+                        <a href="#">
+                            <i class="fas fa-tshirt category-icon"></i>
+                            <span>Adolescentes</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Nivel 2: Subcategorías -->
+            <div class="menu-level" id="level-2">
+                <ul id="subcategories-list">
+                    <!-- Se llena dinámicamente -->
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Vista previa para desktop -->
+        <div class="category-preview" id="category-preview"></div>
+    </div>
+    
+    <!-- Overlay para el menú -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <!-- <nav class="navbar-premium">
+        <div class="logo-premium">ALNOAN</div>
+        <div class="nav-icons-premium">
+            <a href="#" class="nav-icon-premium"><i class="fas fa-search"></i></a>
+            <a href="#" class="nav-icon-premium"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#" class="nav-icon-premium"><i class="fas fa-user"></i></a>
+        </div>
+    </nav> -->
+
+    <div class="legal-super-container">
+        <div class="legal-master-wrapper">
+            <div class="legal-header">
+                <h1>Política de Privacidad</h1>
+                <p>Cómo protegemos y gestionamos tus datos personales en ALNOAN</p>
+            </div>
+            
+            <div class="legal-grid-container">
+                <article class="legal-article">
+                    <h2>Recopilación de Información</h2>
+                    <p><strong>Datos personales:</strong> Recopilamos información como nombre, dirección de correo electrónico, dirección postal y número de teléfono cuando te registras o realizas una compra.</p>
+                    <p><strong>Datos de navegación:</strong> Automáticamente recopilamos información sobre tu dispositivo y cómo interactúas con nuestro sitio.</p>
+                </article>
+                
+                <article class="legal-article">
+                    <h2>Uso de tu Información</h2>
+                    <p>Utilizamos tus datos para procesar transacciones, mejorar nuestros servicios, personalizar tu experiencia y comunicarnos contigo sobre ofertas y actualizaciones relevantes.</p>
+                </article>
+                
+                <article class="legal-article">
+                    <h2>Protección de Datos</h2>
+                    <p>Implementamos medidas de seguridad físicas, electrónicas y administrativas para proteger tu información contra acceso no autorizado, alteración o destrucción.</p>
+                </article>
+                
+                <article class="legal-article">
+                    <h2>Cookies y Tecnologías Similares</h2>
+                    <p>Utilizamos cookies para analizar el tráfico del sitio, personalizar contenido y ofrecer funciones de redes sociales. Puedes gestionar tus preferencias en la configuración de tu navegador.</p>
+                </article>
+                
+                <article class="legal-article">
+                    <h2>Compartición de Información</h2>
+                    <p>No vendemos ni alquilamos tus datos personales. Solo compartimos información con terceros necesarios para prestar nuestros servicios, siempre bajo acuerdos de confidencialidad.</p>
+                </article>
+                
+                <article class="legal-article">
+                    <h2>Tus Derechos</h2>
+                    <p>Tienes derecho a acceder, corregir, eliminar o limitar el uso de tus datos personales. Puedes ejercer estos derechos contactándonos directamente.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Datos de categorías y subcategorías
+    const categoriesData = {
+        mujer: ['Trabajo', 'Viaje', 'Deporte', 'Moda', 'Escolar'],
+        hombre: ['Sedentarismo', 'Viaje', 'Deporte', 'Trabajo', 'Gimnasio'],
+        ninos: ['Escolar', 'Paseo', 'Deporte', 'Juguete'],
+        ninas: ['Escolar', 'Paseo', 'Deporte', 'Juguete', 'Moda'],
+        adolescentes: ['Escolar', 'Moda', 'Deporte', 'Tecnología']
+    };
+    
+    // Elementos del DOM
+    const menuToggle = document.getElementById('menu-toggle');
+    const categoriesMenu = document.getElementById('categories-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const closeMenu = document.getElementById('close-menu');
+    const backBtn = document.getElementById('back-btn');
+    const level1 = document.getElementById('level-1');
+    const level2 = document.getElementById('level-2');
+    const subcategoriesList = document.getElementById('subcategories-list');
+    const menuTitle = document.getElementById('menu-title');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchBox = document.querySelector('.search-box');
+    const searchInput = document.getElementById('search-input');
+    const searchSuggestions = document.querySelector('.search-suggestions');
+    const categoryPreview = document.getElementById('category-preview');
+    const clickSound = document.getElementById('click-sound');
+    
+    // Variables de estado
+    let currentCategory = '';
+    let menuOpen = false;
+    let searchTimeout;
+    
+    // Configurar efectos de sonido
+    clickSound.volume = 0.3;
+    const soundEnabled = localStorage.getItem('soundEffects') === 'true';
+    
+    // Función para reproducir sonido
+    function playSound() {
+        if (soundEnabled) {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log("No se pudo reproducir sonido:", e));
+        }
+    }
+    
+    // Efecto ripple al hacer clic
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        button.appendChild(ripple);
+        
+        ripple.addEventListener('animationend', () => {
+            ripple.remove();
+        });
+    }
+    
+    // Añadir efecto ripple a los botones
+    document.querySelectorAll('.nav-icon, .menu-btn, .search-btn, .back-btn, .close-menu').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            playSound();
+            createRipple(e);
+        });
+    });
+    
+    // Abrir/cerrar menú de categorías
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+        
+        if (menuOpen) {
+            categoriesMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showLevel1();
+        } else {
+            closeAllMenus();
+        }
+    }
+    
+    // Cerrar menú completamente
+    function closeAllMenus() {
+        menuOpen = false;
+        categoriesMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            showLevel1();
+        }, 300);
+    }
+    
+    // Mostrar nivel 1 (categorías principales)
+    function showLevel1() {
+        level1.classList.add('active');
+        level2.classList.remove('active');
+        menuTitle.textContent = 'Categorías';
+        currentCategory = '';
+        
+        // Resetear vista previa
+        categoryPreview.style.backgroundImage = 'none';
+    }
+    
+    // Mostrar nivel 2 (subcategorías)
+    function showLevel2(category) {
+        currentCategory = category;
+        level1.classList.remove('active');
+        level2.classList.add('active');
+        menuTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        
+        // Actualizar vista previa si existe
+        const previewItem = document.querySelector(`[data-category="${category}"][data-preview]`);
+        if (previewItem && previewItem.dataset.preview) {
+            categoryPreview.style.backgroundImage = `url(${previewItem.dataset.preview})`;
+        }
+        
+        // Limpiar y cargar subcategorías
+        subcategoriesList.innerHTML = '';
+        categoriesData[category].forEach(subcategory => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <a href="catalogo.html?category=${category}&subcategory=${subcategory.toLowerCase()}">
+                    <span>${subcategory}</span>
+                </a>
+            `;
+            subcategoriesList.appendChild(li);
+        });
+    }
+    
+    // Event listeners para categorías principales
+    document.querySelectorAll('#level-1 li').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            showLevel2(category);
+        });
+    });
+    
+    // Botón para volver atrás
+    backBtn.addEventListener('click', function() {
+        if (level2.classList.contains('active')) {
+            showLevel1();
+        } else {
+            closeAllMenus();
+        }
+    });
+    
+    // Botón de menú
+    menuToggle.addEventListener('click', toggleMenu);
+    
+    // Cerrar menú con el botón X
+    closeMenu.addEventListener('click', closeAllMenus);
+    
+    // Cerrar menú con overlay
+    menuOverlay.addEventListener('click', closeAllMenus);
+    
+    // Buscador
+    searchToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        searchBox.classList.toggle('active');
+        
+        if (searchBox.classList.contains('active')) {
+            searchInput.focus();
+        }
+    });
+    
+    // Cerrar buscador al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (!searchToggle.contains(e.target) && !searchBox.contains(e.target)) {
+            searchBox.classList.remove('active');
+            searchSuggestions.style.display = 'none';
+        }
+    });
+    
+    // Sugerencias de búsqueda
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        
+        if (this.value.length > 1) {
+            searchTimeout = setTimeout(() => {
+                // Simular búsqueda con datos estáticos
+                const suggestions = ['Mochila de viaje', 'Mochila escolar', 'Mochila deportiva'];
+                showSearchSuggestions(suggestions);
+                
+                // Mostrar resultados populares si no hay coincidencias
+                if (suggestions.length === 0 && this.value.length < 3) {
+                    showPopularSearches();
+                }
+            }, 300); // Debounce de 300ms
+        } else {
+            searchSuggestions.style.display = 'none';
+        }
+    });
+    
+    function showSearchSuggestions(items) {
+        searchSuggestions.innerHTML = '';
+        
+        if (items.length > 0) {
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = item;
+                div.addEventListener('click', function() {
+                    searchInput.value = item;
+                    searchSuggestions.style.display = 'none';
+                    // Ejecutar búsqueda
+                    window.location.href = `busqueda.html?q=${encodeURIComponent(item)}`;
+                });
+                searchSuggestions.appendChild(div);
+            });
+            
+            searchSuggestions.style.display = 'block';
+        } else {
+            searchSuggestions.style.display = 'none';
+        }
+    }
+    
+    function showPopularSearches() {
+        const popular = ['Mochila viaje', 'Mochila escolar', 'Mochila deportiva'];
+        searchSuggestions.innerHTML = `
+            <div class="suggestion-header">Búsquedas populares</div>
+            ${popular.map(item => `
+                <div class="suggestion-item popular">
+                    <i class="fas fa-fire"></i>
+                    <span>${item}</span>
+                </div>
+            `).join('')}
+        `;
+        searchSuggestions.style.display = 'block';
+    }
+    
+    // Actualizar contador del carrito
+    function updateCartCount(count) {
+        const cartCount = document.querySelector('.cart-count');
+        if (count > 0) {
+            cartCount.textContent = count;
+            cartCount.style.display = 'flex';
+            document.querySelector('.cart-badge').classList.add('added');
+            setTimeout(() => {
+                document.querySelector('.cart-badge').classList.remove('added');
+            }, 600);
+        } else {
+            cartCount.style.display = 'none';
+        }
+    }
+    
+    // Simular actualización del carrito
+    function simulateCartUpdate() {
+        let count = 0;
+        setInterval(() => {
+            count = (count + 1) % 5;
+            updateCartCount(count);
+            
+            // Mostrar notificación flotante cada 3 actualizaciones
+            if (count % 3 === 0 && count > 0) {
+                showFloatingCartItem({
+                    name: `Mochila Ejemplo ${count}`,
+                    image: 'img/products/example.jpg'
+                });
+            }
+        }, 5000);
+    }
+    
+    // Mostrar notificación de producto añadido
+    function showFloatingCartItem(item) {
+        const floater = document.createElement('div');
+        floater.className = 'cart-floater';
+        floater.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" onerror="this.src='img/placeholder.jpg'">
+            <div>
+                <div>¡Añadido al carrito!</div>
+                <div class="item-name">${item.name}</div>
+            </div>
+        `;
+        
+        document.body.appendChild(floater);
+        
+        setTimeout(() => {
+            floater.classList.add('show');
+            setTimeout(() => {
+                floater.classList.remove('show');
+                setTimeout(() => {
+                    floater.remove();
+                }, 500);
+            }, 3000);
+        }, 100);
+    }
+    
+    // Efecto al hacer scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        const logo = document.querySelector('.logo');
+        
+        // Mostrar/ocultar navbar al hacer scroll
+        if (currentScroll > 100 && currentScroll > lastScroll && !menuOpen) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        
+        // Efecto parallax en el logo
+        if (currentScroll <= 200) {
+            const scale = 1 - (currentScroll * 0.001);
+            const opacity = 1 - (currentScroll * 0.005);
+            logo.style.transform = `scale(${Math.max(scale, 0.9)})`;
+            logo.style.opacity = Math.max(opacity, 0.8);
+        }
+        
+        // Añadir clase 'scrolled' después de cierto scroll
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Inicialización
+    updateCartCount(0);
+    simulateCartUpdate();
+    
+    // Configurar vista previa en desktop
+    if (window.innerWidth >= 992) {
+        categoriesMenu.style.display = 'grid';
+        categoryPreview.style.display = 'block';
+    }
+    
+    // Precarga de imágenes de categorías
+    const categoryPreviews = [
+        'img/categories/women-preview.jpg',
+        'img/categories/men-preview.jpg'
+    ];
+    
+    categoryPreviews.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+});
+    </script>
+    <footer class="footer-premium">
+        <div class="footer-content-premium">
+            <div class="social-icons-premium">
+                <a href="https://www.facebook.com/share/1BYCo4hQdS/" target="_blank" class="social-icon-premium"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/alnoan_of?igsh=MWt1cGYzZHQyMHQ2YQ==" target="_blank" class="social-icon-premium"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/AlnoanOf?t=SuhqnyzOIuFDUUirZb_yww&s=09" target="_blank" class="social-icon-premium"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-links-premium">
+                <a href="aviso-legal.html" class="footer-link-premium">Aviso Legal</a>
+                <a href="politica-de-privacidad.html" class="footer-link-premium">Política de Privacidad</a>
+                <a href="terminos-y-condiciones.html" class="footer-link-premium">Términos y Condiciones</a>
+            </div>
+            <p>&copy; 2025 ALNOAN. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

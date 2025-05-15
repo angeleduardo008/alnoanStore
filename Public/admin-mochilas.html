@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Mochilas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="Css/admin-mochilas.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Administrar Mochilas</h1>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar mochilas...">
+            <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="categoryFilter">Categoría</label>
+                <select id="categoryFilter">
+                    <option value="">Todas</option>
+                    <option value="urbana">Urbana</option>
+                    <option value="viaje">Viaje</option>
+                    <option value="escolar">Escolar</option>
+                    <option value="deportiva">Deportiva</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="priceFilter">Precio máximo</label>
+                <input type="number" id="priceFilter" placeholder="S/ Máximo">
+            </div>
+            
+            <div class="filter-group">
+                <label for="stockFilter">Stock mínimo</label>
+                <input type="number" id="stockFilter" placeholder="Mínimo">
+            </div>
+        </div>
+        
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th data-sort="id">ID <i class="fas fa-sort"></i></th>
+                    <th>Imagen</th>
+                    <th data-sort="name">Nombre <i class="fas fa-sort"></i></th>
+                    <th data-sort="price">Precio <i class="fas fa-sort"></i></th>
+                    <th data-sort="category">Categoría <i class="fas fa-sort"></i></th>
+                    <th data-sort="stock">Stock <i class="fas fa-sort"></i></th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Mochila Urbana Premium" class="product-img"></td>
+                    <td>Mochila Urbana Premium</td>
+                    <td>S/ 189.99</td>
+                    <td>urbana</td>
+                    <td class="stock-low">5</td>
+                    <td class="actions">
+                        <button class="btn btn-view"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Mochila de Viaje XL" class="product-img"></td>
+                    <td>Mochila de Viaje XL</td>
+                    <td>S/ 249.99</td>
+                    <td>viaje</td>
+                    <td>8</td>
+                    <td class="actions">
+                        <button class="btn btn-view"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Mochila Escolar Pro" class="product-img"></td>
+                    <td>Mochila Escolar Pro</td>
+                    <td>S/ 159.99</td>
+                    <td>escolar</td>
+                    <td>12</td>
+                    <td class="actions">
+                        <button class="btn btn-view"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <button class="page-btn"><i class="fas fa-angle-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="fas fa-angle-right"></i></button>
+        </div>
+        
+        <button class="add-btn" id="addProductBtn">
+            <i class="fas fa-plus"></i> Agregar Mochila
+        </button>
+    </div>
+    <link rel="stylesheet" href="Js/admin-mochilas.js">
+</body>
+</html>
