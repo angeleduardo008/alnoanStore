@@ -29,22 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCategory = '';
     let menuOpen = false;
     let searchTimeout;
-    
-    // Configurar efectos de sonido
-    clickSound.volume = 0.3;
-    const soundEnabled = localStorage.getItem('soundEffects') === 'true';
-    
-    // Función para reproducir sonido
-    function playSound() {
-        if (soundEnabled) {
-            clickSound.currentTime = 0;
-            clickSound.play().catch(e => console.log("No se pudo reproducir sonido:", e));
-        }
-    }
-    
     // Efecto ripple al hacer clic
     function createRipple(event) {
         const button = event.currentTarget;
+        if (!button) return;
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
         
@@ -63,14 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ripple.remove();
         });
     }
-    
-    // Añadir efecto ripple a los botones
-    document.querySelectorAll('.nav-icon, .menu-btn, .search-btn, .back-btn, .close-menu').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            playSound();
-            createRipple(e);
-        });
-    });
     
     // Abrir/cerrar menú de categorías
     function toggleMenu() {
@@ -99,39 +79,49 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Mostrar nivel 1 (categorías principales)
     function showLevel1() {
+        if (!level1 || !level2 || !menuTitle) return;
+        
         level1.classList.add('active');
         level2.classList.remove('active');
         menuTitle.textContent = 'Categorías';
         currentCategory = '';
         
         // Resetear vista previa
-        categoryPreview.style.backgroundImage = 'none';
+        if (categoryPreview) {
+            categoryPreview.style.backgroundImage = 'none';
+        }
     }
     
     // Mostrar nivel 2 (subcategorías)
     function showLevel2(category) {
+        if (!level1 || !level2 || !menuTitle || !subcategoriesList) return;
+        
         currentCategory = category;
         level1.classList.remove('active');
         level2.classList.add('active');
         menuTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
         
         // Actualizar vista previa si existe
-        const previewItem = document.querySelector(`[data-category="${category}"][data-preview]`);
-        if (previewItem && previewItem.dataset.preview) {
-            categoryPreview.style.backgroundImage = `url(${previewItem.dataset.preview})`;
+        if (categoryPreview) {
+            const previewItem = document.querySelector(`[data-category="${category}"][data-preview]`);
+            if (previewItem && previewItem.dataset.preview) {
+                categoryPreview.style.backgroundImage = `url(${previewItem.dataset.preview})`;
+            }
         }
         
         // Limpiar y cargar subcategorías
         subcategoriesList.innerHTML = '';
-        categoriesData[category].forEach(subcategory => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <a href="catalogo.html?category=${category}&subcategory=${subcategory.toLowerCase()}">
-                    <span>${subcategory}</span>
-                </a>
-            `;
-            subcategoriesList.appendChild(li);
-        });
+        if (categoriesData[category]) {
+            categoriesData[category].forEach(subcategory => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="catalogo.html?category=${category}&subcategory=${subcategory.toLowerCase()}">
+                        <span>${subcategory}</span>
+                    </a>
+                `;
+                subcategoriesList.appendChild(li);
+            });
+        }
     }
     
     // Event listeners para categorías principales
@@ -139,76 +129,96 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const category = this.getAttribute('data-category');
-            showLevel2(category);
+            if (category) {
+                showLevel2(category);
+            }
         });
     });
     
     // Botón para volver atrás
-    backBtn.addEventListener('click', function() {
-        if (level2.classList.contains('active')) {
-            showLevel1();
-        } else {
-            closeAllMenus();
-        }
-    });
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            if (level2 && level2.classList.contains('active')) {
+                showLevel1();
+            } else {
+                closeAllMenus();
+            }
+        });
+    }
     
     // Botón de menú
-    menuToggle.addEventListener('click', toggleMenu);
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+    }
     
     // Cerrar menú con el botón X
-    closeMenu.addEventListener('click', closeAllMenus);
+    if (closeMenu) {
+        closeMenu.addEventListener('click', closeAllMenus);
+    }
     
     // Cerrar menú con overlay
-    menuOverlay.addEventListener('click', closeAllMenus);
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeAllMenus);
+    }
     
     // Buscador
-    searchToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        searchBox.classList.toggle('active');
-        
-        if (searchBox.classList.contains('active')) {
-            searchInput.focus();
-        }
-    });
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            searchBox.classList.toggle('active');
+            
+            if (searchBox.classList.contains('active') && searchInput) {
+                searchInput.focus();
+            }
+        });
+    }
     
     // Cerrar buscador al hacer clic fuera
     document.addEventListener('click', function(e) {
-        if (!searchToggle.contains(e.target) && !searchBox.contains(e.target)) {
-            searchBox.classList.remove('active');
-            searchSuggestions.style.display = 'none';
+        if (searchBox && searchToggle && searchSuggestions) {
+            if (!searchToggle.contains(e.target) && !searchBox.contains(e.target)) {
+                searchBox.classList.remove('active');
+                searchSuggestions.style.display = 'none';
+            }
         }
     });
     
     // Sugerencias de búsqueda
-    searchInput.addEventListener('input', function() {
-        clearTimeout(searchTimeout);
-        
-        if (this.value.length > 1) {
-            searchTimeout = setTimeout(() => {
-                // Simular búsqueda con datos estáticos
-                const suggestions = ['Mochila de viaje', 'Mochila escolar', 'Mochila deportiva'];
-                showSearchSuggestions(suggestions);
-                
-                // Mostrar resultados populares si no hay coincidencias
-                if (suggestions.length === 0 && this.value.length < 3) {
-                    showPopularSearches();
-                }
-            }, 300); // Debounce de 300ms
-        } else {
-            searchSuggestions.style.display = 'none';
-        }
-    });
+    if (searchInput && searchSuggestions) {
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            
+            if (this.value.length > 1) {
+                searchTimeout = setTimeout(() => {
+                    // Simular búsqueda con datos estáticos
+                    const suggestions = ['Mochila de viaje', 'Mochila escolar', 'Mochila deportiva'];
+                    showSearchSuggestions(suggestions);
+                    
+                    // Mostrar resultados populares si no hay coincidencias
+                    if (suggestions.length === 0 && this.value.length < 3) {
+                        showPopularSearches();
+                    }
+                }, 300); // Debounce de 300ms
+            } else {
+                searchSuggestions.style.display = 'none';
+            }
+        });
+    }
     
     function showSearchSuggestions(items) {
+        if (!searchSuggestions) return;
+        
         searchSuggestions.innerHTML = '';
         
-        if (items.length > 0) {
+        if (items && items.length > 0) {
             items.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'suggestion-item';
                 div.textContent = item;
                 div.addEventListener('click', function() {
-                    searchInput.value = item;
+                    if (searchInput) {
+                        searchInput.value = item;
+                    }
                     searchSuggestions.style.display = 'none';
                     // Ejecutar búsqueda
                     window.location.href = `busqueda.html?q=${encodeURIComponent(item)}`;
@@ -223,6 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showPopularSearches() {
+        if (!searchSuggestions) return;
+        
         const popular = ['Mochila viaje', 'Mochila escolar', 'Mochila deportiva'];
         searchSuggestions.innerHTML = `
             <div class="suggestion-header">Búsquedas populares</div>
@@ -239,35 +251,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Actualizar contador del carrito
     function updateCartCount(count) {
         const cartCount = document.querySelector('.cart-count');
+        if (!cartCount) return;
+        
         if (count > 0) {
             cartCount.textContent = count;
             cartCount.style.display = 'flex';
-            document.querySelector('.cart-badge').classList.add('added');
-            setTimeout(() => {
-                document.querySelector('.cart-badge').classList.remove('added');
-            }, 600);
+            const cartBadge = document.querySelector('.cart-badge');
+            if (cartBadge) {
+                cartBadge.classList.add('added');
+                setTimeout(() => {
+                    cartBadge.classList.remove('added');
+                }, 600);
+            }
         } else {
             cartCount.style.display = 'none';
         }
     }
-    
-    // Simular actualización del carrito
-    function simulateCartUpdate() {
-        let count = 0;
-        setInterval(() => {
-            count = (count + 1) % 5;
-            updateCartCount(count);
-            
-            // Mostrar notificación flotante cada 3 actualizaciones
-            if (count % 3 === 0 && count > 0) {
-                showFloatingCartItem({
-                    name: `Mochila Ejemplo ${count}`,
-                    image: 'img/products/example.jpg'
-                });
-            }
-        }, 5000);
-    }
-    
     // Mostrar notificación de producto añadido
     function showFloatingCartItem(item) {
         const floater = document.createElement('div');
@@ -293,12 +292,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
     
+    // // Simular actualización del carrito
+    // function simulateCartUpdate() {
+    //     let count = 0;
+    //     const cartInterval = setInterval(() => {
+    //         count = (count + 1) % 5;
+    //         updateCartCount(count);
+            
+    //         // Mostrar notificación flotante cada 3 actualizaciones
+    //         if (count % 3 === 0 && count > 0) {
+    //             showFloatingCartItem({
+    //                 name: `Mochila Ejemplo ${count}`,
+    //                 image: 'img/products/example.jpg'
+    //             });
+    //         }
+    //     }, 5000);
+        
+    //     // Limpiar intervalo cuando la página se cierre
+    //     window.addEventListener('beforeunload', () => {
+    //         clearInterval(cartInterval);
+    //     });
+    // }
+    
     // Efecto al hacer scroll
-    let lastScroll = 0;
-    window.addEventListener('scroll', function() {
+    function handleScroll() {
         const currentScroll = window.scrollY;
         const navbar = document.querySelector('.navbar');
         const logo = document.querySelector('.logo');
+        
+        if (!navbar) return;
         
         // Mostrar/ocultar navbar al hacer scroll
         if (currentScroll > 100 && currentScroll > lastScroll && !menuOpen) {
@@ -308,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Efecto parallax en el logo
-        if (currentScroll <= 200) {
+        if (logo && currentScroll <= 200) {
             const scale = 1 - (currentScroll * 0.001);
             const opacity = 1 - (currentScroll * 0.005);
             logo.style.transform = `scale(${Math.max(scale, 0.9)})`;
@@ -323,28 +345,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         lastScroll = currentScroll;
-    });
-    
-    // Inicialización
-    updateCartCount(0);
-    simulateCartUpdate();
-    
-    // Configurar vista previa en desktop
-    if (window.innerWidth >= 992) {
-        categoriesMenu.style.display = 'grid';
-        categoryPreview.style.display = 'block';
     }
     
-    // Precarga de imágenes de categorías
-    const categoryPreviews = [
-        'img/categories/women-preview.jpg',
-        'img/categories/men-preview.jpg'
-    ];
+    let lastScroll = 0;
+    window.addEventListener('scroll', handleScroll);
     
-    categoryPreviews.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
+    // Precarga de imágenes de categorías
+    function preloadCategoryImages() {
+        const categoryPreviews = [
+            'img/categories/women-preview.jpg',
+            'img/categories/men-preview.jpg'
+        ];
+        
+        categoryPreviews.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+    
+    // Inicialización
+    function init() {
+        // updateCartCount(0);
+        // simulateCartUpdate();
+        // preloadCategoryImages();
+        
+        // Configurar vista previa en desktop
+        if (window.innerWidth >= 992 && categoriesMenu && categoryPreview) {
+            categoriesMenu.style.display = 'grid';
+            categoryPreview.style.display = 'block';
+        }
+    }
+    
+    init();
 });
 // document.addEventListener('DOMContentLoaded', function() {
 //     // Animación de la barra de navegación al hacer scroll

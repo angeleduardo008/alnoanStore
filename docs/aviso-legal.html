@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aviso Legal | ALNOAN</title>
     <style>
-        /* Variables con la paleta de colores */
+       /* Variables con la paleta de colores */
 :root {
     --cool-gray: #B7BAC3;
     --platinum: #E4E4E4;
@@ -18,14 +18,11 @@
     --transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
     --border-radius: 8px;
 }
-
-/* Reset y estilos base */
-* {
+ * {
     margin: 0;
-    padding: 0;
+    padding: 0 6px;
     box-sizing: border-box;
-}
-
+  }
 body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background-color: var(--ghost-white);
@@ -384,36 +381,42 @@ body {
     font-weight: 500;
 }
 
-/* Menú de categorías */
+/* Menú de categorías - VERSIÓN CORREGIDA */
 .categories-menu {
     position: fixed;
-    top: 0;
-    left: -100%;
-    width: 90%;
-    max-width: 400px;
-    height: 100vh;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 70px);
     background: var(--light);
-    z-index: 1002;
-    transition: var(--transition);
+    z-index: 999;
+    box-shadow: var(--shadow);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .categories-menu.active {
-    left: 0;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .menu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem;
-    border-bottom: 1px solid var(--platinum);
+    padding: 1rem;
     background: var(--ghost-white);
+    border-bottom: 1px solid var(--platinum);
 }
 
 .menu-header h3 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     margin: 0;
     font-size: 1.2rem;
     color: var(--medium-slate-blue);
@@ -431,37 +434,28 @@ body {
     gap: 0.5rem;
     padding: 0.5rem;
     transition: var(--transition);
+    z-index: 1;
 }
 
-.menu-header button:hover {
-    color: var(--medium-slate-blue);
+.back-btn {
+    margin-right: auto;
+}
+
+.close-menu {
+    margin-left: auto;
 }
 
 .menu-content {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    position: relative;
+    padding: 1rem;
+    overflow-y: auto;
 }
 
 .menu-level {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    overflow-y: auto;
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateX(20px);
-    pointer-events: none;
+    display: none;
 }
 
 .menu-level.active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: all;
+    display: block;
 }
 
 .menu-level ul {
@@ -471,14 +465,13 @@ body {
 }
 
 .menu-level li {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
 }
 
 .menu-level a {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0.9rem 1rem;
+    padding: 0.8rem 1rem;
     color: var(--text);
     text-decoration: none;
     border-radius: var(--border-radius);
@@ -487,32 +480,11 @@ body {
 
 .menu-level a:hover {
     background-color: var(--ghost-white);
-    color: var(--medium-slate-blue);
-    transform: translateX(5px);
 }
 
 .category-icon {
     margin-right: 0.8rem;
     color: var(--medium-slate-blue);
-    width: 20px;
-    text-align: center;
-}
-
-.category-preview {
-    display: none;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
-
-.category-preview::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
 }
 
 .menu-overlay {
@@ -522,7 +494,7 @@ body {
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
+    z-index: 998;
     display: none;
     backdrop-filter: blur(3px);
 }
@@ -581,6 +553,82 @@ body {
     to {
         transform: scale(4);
         opacity: 0;
+    }
+}
+
+/* Responsive - VERSIÓN CORREGIDA */
+@media (min-width: 992px) {
+    .categories-menu {
+        top: 80px; 
+        left: 50%;
+        width: 80%;
+        max-width: 1000px;
+        transform: translate(-50%, -100%);
+    }
+    
+    .categories-menu.active {
+        transform: translate(-50%, 0);
+    }
+    
+    .menu-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .nav-actions {
+        gap: 1rem;
+    }
+    
+    .search-box {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-text {
+        display: none;
+    }
+    
+    .menu-icon {
+        margin-right: 0;
+    }
+    
+    .nav-actions {
+        gap: 0.8rem;
+    }
+    
+    .search-box {
+        width: 250px;
+        right: -50px;
+    }
+    
+    .dropdown-content {
+        right: -50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .nav-icon {
+        padding: 0.5rem;
+    }
+    
+    .categories-menu {
+        width: 100%;
     }
 }
         /* Contenido Legal Mejorado */
@@ -879,65 +927,64 @@ body {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-     <!-- Barra de navegación premium -->
-     <nav class="navbar">
+         <!-- Barra de navegación premium -->
+    <nav class="navbar">
         <!-- Logo con efecto hover -->
-        <a href="index.html" class="logo">
+        <a href="index.html" class="logo" aria-label="Inicio">
             <span>ALNOAN</span>
             <div class="logo-hover"></div>
         </a>
-        
         <!-- Contenedor de acciones -->
         <div class="nav-actions">
             <!-- Buscador mejorado -->
             <div class="search-container">
-                <button id="search-toggle" class="nav-icon" aria-label="Buscar">
+                <button id="search-toggle" class="nav-icon" aria-label="Buscar productos">
                     <i class="fas fa-search"></i>
                 </button>
                 <div class="search-box">
-                    <input type="text" placeholder="Buscar productos..." id="search-input">
+                    <input type="text" placeholder="Buscar productos..." id="search-input" aria-label="Campo de búsqueda">
                     <button class="search-btn" aria-label="Ejecutar búsqueda">
                         <i class="fas fa-search"></i>
                     </button>
-                    <div class="search-suggestions"></div>
+                    <div class="search-suggestions" aria-live="polite"></div>
                 </div>
             </div>
             
             <!-- Menú de usuario con avatar -->
             <div class="user-dropdown">
-                <button class="nav-icon user-btn" aria-label="Menú de usuario">
+                <button class="nav-icon user-btn" aria-label="Menú de usuario" aria-expanded="false" aria-controls="user-dropdown-menu">
                     <div class="user-avatar">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user" aria-hidden="true"></i>
                     </div>
                 </button>
-                <div class="dropdown-content">
+                <div class="dropdown-content" id="user-dropdown-menu">
                     <div class="user-info">
-                        <div class="user-avatar"><i class="fas fa-user"></i></div>
+                        <div class="user-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
                         <div>
                             <div class="user-name">Invitado</div>
                             <div class="user-email">Inicia sesión</div>
                         </div>
                     </div>
-                    <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
-                    <a href="#"><i class="fas fa-clipboard-list"></i> Mis pedidos</a>
-                    <a href="#"><i class="fas fa-heart"></i> Favoritos</a>
-                    <a href="#"><i class="fas fa-history"></i> Historial</a>
+                    <a href="#" aria-label="Iniciar sesión"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Iniciar sesión</a>
+                    <a href="#" aria-label="Mis pedidos"><i class="fas fa-clipboard-list" aria-hidden="true"></i> Mis pedidos</a>
+                    <a href="#" aria-label="Favoritos"><i class="fas fa-heart" aria-hidden="true"></i> Favoritos</a>
+                    <a href="#" aria-label="Historial"><i class="fas fa-history" aria-hidden="true"></i> Historial</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                    <a href="#" aria-label="Cerrar sesión"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Cerrar sesión</a>
                 </div>
             </div>
             
             <!-- Carrito con notificación -->
             <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
                 <div class="cart-badge">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                    <span class="cart-count" aria-live="polite">0</span>
                 </div>
             </a>
             
             <!-- Botón de menú mejorado -->
-            <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal">
-                <div class="menu-icon">
+            <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal" aria-expanded="false" aria-controls="categories-menu">
+                <div class="menu-icon" aria-hidden="true">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -948,74 +995,74 @@ body {
     </nav>
     
     <!-- Menú de categorías mejorado -->
-    <div class="categories-menu" id="categories-menu">
+    <div class="categories-menu" id="categories-menu" aria-hidden="true">
         <div class="menu-header">
             <button class="back-btn" id="back-btn" aria-label="Volver">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
                 <span>Volver</span>
             </button>
             <h3 id="menu-title">Categorías</h3>
             <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
         </div>
         
         <div class="menu-content">
             <!-- Nivel 1: Categorías principales -->
-            <div class="menu-level active" id="level-1">
+            <div class="menu-level active" id="level-1" role="menu">
                 <ul>
-                    <li data-category="mujer" data-preview="img/categories/women-preview.jpg">
-                        <a href="#">
-                            <i class="fas fa-female category-icon"></i>
+                    <li data-category="mujer" data-preview="img/categories/women-preview.jpg" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-female category-icon" aria-hidden="true"></i>
                             <span>Mujer</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li data-category="hombre" data-preview="img/categories/men-preview.jpg">
-                        <a href="#">
-                            <i class="fas fa-male category-icon"></i>
+                    <li data-category="hombre" data-preview="img/categories/men-preview.jpg" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-male category-icon" aria-hidden="true"></i>
                             <span>Hombre</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li data-category="ninos">
-                        <a href="#">
-                            <i class="fas fa-child category-icon"></i>
+                    <li data-category="ninos" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-child category-icon" aria-hidden="true"></i>
                             <span>Niños</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li data-category="ninas">
-                        <a href="#">
-                            <i class="fas fa-child-dress category-icon"></i>
+                    <li data-category="ninas" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-female category-icon" aria-hidden="true"></i>
                             <span>Niñas</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li data-category="adolescentes">
-                        <a href="#">
-                            <i class="fas fa-tshirt category-icon"></i>
+                    <li data-category="adolescentes" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-tshirt category-icon" aria-hidden="true"></i>
                             <span>Adolescentes</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
             </div>
             
             <!-- Nivel 2: Subcategorías -->
-            <div class="menu-level" id="level-2">
-                <ul id="subcategories-list">
+            <div class="menu-level" id="level-2" role="menu" aria-hidden="true">
+                <ul id="subcategories-list" role="none">
                     <!-- Se llena dinámicamente -->
                 </ul>
             </div>
         </div>
         
         <!-- Vista previa para desktop -->
-        <div class="category-preview" id="category-preview"></div>
+        <div class="category-preview" id="category-preview" aria-hidden="true"></div>
     </div>
     
     <!-- Overlay para el menú -->
-    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
     <div class="legal-super-container">
         <div class="legal-master-wrapper">
@@ -1057,7 +1104,386 @@ body {
             </div>
         </div>
     </div>
-
+    <script> document.addEventListener('DOMContentLoaded', function() {
+    // Datos de categorías y subcategorías
+    const categoriesData = {
+        mujer: ['Trabajo', 'Viaje', 'Deporte', 'Moda', 'Escolar'],
+        hombre: ['Sedentarismo', 'Viaje', 'Deporte', 'Trabajo', 'Gimnasio'],
+        ninos: ['Escolar', 'Paseo', 'Deporte', 'Juguete'],
+        ninas: ['Escolar', 'Paseo', 'Deporte', 'Juguete', 'Moda'],
+        adolescentes: ['Escolar', 'Moda', 'Deporte', 'Tecnología']
+    };
+    
+    // Elementos del DOM
+    const menuToggle = document.getElementById('menu-toggle');
+    const categoriesMenu = document.getElementById('categories-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const closeMenu = document.getElementById('close-menu');
+    const backBtn = document.getElementById('back-btn');
+    const level1 = document.getElementById('level-1');
+    const level2 = document.getElementById('level-2');
+    const subcategoriesList = document.getElementById('subcategories-list');
+    const menuTitle = document.getElementById('menu-title');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchBox = document.querySelector('.search-box');
+    const searchInput = document.getElementById('search-input');
+    const searchSuggestions = document.querySelector('.search-suggestions');
+    const categoryPreview = document.getElementById('category-preview');
+    const clickSound = document.getElementById('click-sound');
+    
+    // Variables de estado
+    let currentCategory = '';
+    let menuOpen = false;
+    let searchTimeout;
+    // Efecto ripple al hacer clic
+    function createRipple(event) {
+        const button = event.currentTarget;
+        if (!button) return;
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        button.appendChild(ripple);
+        
+        ripple.addEventListener('animationend', () => {
+            ripple.remove();
+        });
+    }
+    
+    // Abrir/cerrar menú de categorías
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+        
+        if (menuOpen) {
+            categoriesMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showLevel1();
+        } else {
+            closeAllMenus();
+        }
+    }
+    
+    // Cerrar menú completamente
+    function closeAllMenus() {
+        menuOpen = false;
+        categoriesMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            showLevel1();
+        }, 300);
+    }
+    
+    // Mostrar nivel 1 (categorías principales)
+    function showLevel1() {
+        if (!level1 || !level2 || !menuTitle) return;
+        
+        level1.classList.add('active');
+        level2.classList.remove('active');
+        menuTitle.textContent = 'Categorías';
+        currentCategory = '';
+        
+        // Resetear vista previa
+        if (categoryPreview) {
+            categoryPreview.style.backgroundImage = 'none';
+        }
+    }
+    
+    // Mostrar nivel 2 (subcategorías)
+    function showLevel2(category) {
+        if (!level1 || !level2 || !menuTitle || !subcategoriesList) return;
+        
+        currentCategory = category;
+        level1.classList.remove('active');
+        level2.classList.add('active');
+        menuTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        
+        // Actualizar vista previa si existe
+        if (categoryPreview) {
+            const previewItem = document.querySelector(`[data-category="${category}"][data-preview]`);
+            if (previewItem && previewItem.dataset.preview) {
+                categoryPreview.style.backgroundImage = `url(${previewItem.dataset.preview})`;
+            }
+        }
+        
+        // Limpiar y cargar subcategorías
+        subcategoriesList.innerHTML = '';
+        if (categoriesData[category]) {
+            categoriesData[category].forEach(subcategory => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="catalogo.html?category=${category}&subcategory=${subcategory.toLowerCase()}">
+                        <span>${subcategory}</span>
+                    </a>
+                `;
+                subcategoriesList.appendChild(li);
+            });
+        }
+    }
+    
+    // Event listeners para categorías principales
+    document.querySelectorAll('#level-1 li').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            if (category) {
+                showLevel2(category);
+            }
+        });
+    });
+    
+    // Botón para volver atrás
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            if (level2 && level2.classList.contains('active')) {
+                showLevel1();
+            } else {
+                closeAllMenus();
+            }
+        });
+    }
+    
+    // Botón de menú
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+    }
+    
+    // Cerrar menú con el botón X
+    if (closeMenu) {
+        closeMenu.addEventListener('click', closeAllMenus);
+    }
+    
+    // Cerrar menú con overlay
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeAllMenus);
+    }
+    
+    // Buscador
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            searchBox.classList.toggle('active');
+            
+            if (searchBox.classList.contains('active') && searchInput) {
+                searchInput.focus();
+            }
+        });
+    }
+    
+    // Cerrar buscador al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (searchBox && searchToggle && searchSuggestions) {
+            if (!searchToggle.contains(e.target) && !searchBox.contains(e.target)) {
+                searchBox.classList.remove('active');
+                searchSuggestions.style.display = 'none';
+            }
+        }
+    });
+    
+    // Sugerencias de búsqueda
+    if (searchInput && searchSuggestions) {
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            
+            if (this.value.length > 1) {
+                searchTimeout = setTimeout(() => {
+                    // Simular búsqueda con datos estáticos
+                    const suggestions = ['Mochila de viaje', 'Mochila escolar', 'Mochila deportiva'];
+                    showSearchSuggestions(suggestions);
+                    
+                    // Mostrar resultados populares si no hay coincidencias
+                    if (suggestions.length === 0 && this.value.length < 3) {
+                        showPopularSearches();
+                    }
+                }, 300); // Debounce de 300ms
+            } else {
+                searchSuggestions.style.display = 'none';
+            }
+        });
+    }
+    
+    function showSearchSuggestions(items) {
+        if (!searchSuggestions) return;
+        
+        searchSuggestions.innerHTML = '';
+        
+        if (items && items.length > 0) {
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = item;
+                div.addEventListener('click', function() {
+                    if (searchInput) {
+                        searchInput.value = item;
+                    }
+                    searchSuggestions.style.display = 'none';
+                    // Ejecutar búsqueda
+                    window.location.href = `busqueda.html?q=${encodeURIComponent(item)}`;
+                });
+                searchSuggestions.appendChild(div);
+            });
+            
+            searchSuggestions.style.display = 'block';
+        } else {
+            searchSuggestions.style.display = 'none';
+        }
+    }
+    
+    function showPopularSearches() {
+        if (!searchSuggestions) return;
+        
+        const popular = ['Mochila viaje', 'Mochila escolar', 'Mochila deportiva'];
+        searchSuggestions.innerHTML = `
+            <div class="suggestion-header">Búsquedas populares</div>
+            ${popular.map(item => `
+                <div class="suggestion-item popular">
+                    <i class="fas fa-fire"></i>
+                    <span>${item}</span>
+                </div>
+            `).join('')}
+        `;
+        searchSuggestions.style.display = 'block';
+    }
+    
+    // Actualizar contador del carrito
+    function updateCartCount(count) {
+        const cartCount = document.querySelector('.cart-count');
+        if (!cartCount) return;
+        
+        if (count > 0) {
+            cartCount.textContent = count;
+            cartCount.style.display = 'flex';
+            const cartBadge = document.querySelector('.cart-badge');
+            if (cartBadge) {
+                cartBadge.classList.add('added');
+                setTimeout(() => {
+                    cartBadge.classList.remove('added');
+                }, 600);
+            }
+        } else {
+            cartCount.style.display = 'none';
+        }
+    }
+    // Mostrar notificación de producto añadido
+    function showFloatingCartItem(item) {
+        const floater = document.createElement('div');
+        floater.className = 'cart-floater';
+        floater.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" onerror="this.src='img/placeholder.jpg'">
+            <div>
+                <div>¡Añadido al carrito!</div>
+                <div class="item-name">${item.name}</div>
+            </div>
+        `;
+        
+        document.body.appendChild(floater);
+        
+        setTimeout(() => {
+            floater.classList.add('show');
+            setTimeout(() => {
+                floater.classList.remove('show');
+                setTimeout(() => {
+                    floater.remove();
+                }, 500);
+            }, 3000);
+        }, 100);
+    }
+    
+    // // Simular actualización del carrito
+    // function simulateCartUpdate() {
+    //     let count = 0;
+    //     const cartInterval = setInterval(() => {
+    //         count = (count + 1) % 5;
+    //         updateCartCount(count);
+            
+    //         // Mostrar notificación flotante cada 3 actualizaciones
+    //         if (count % 3 === 0 && count > 0) {
+    //             showFloatingCartItem({
+    //                 name: `Mochila Ejemplo ${count}`,
+    //                 image: 'img/products/example.jpg'
+    //             });
+    //         }
+    //     }, 5000);
+        
+    //     // Limpiar intervalo cuando la página se cierre
+    //     window.addEventListener('beforeunload', () => {
+    //         clearInterval(cartInterval);
+    //     });
+    // }
+    
+    // Efecto al hacer scroll
+    function handleScroll() {
+        const currentScroll = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        const logo = document.querySelector('.logo');
+        
+        if (!navbar) return;
+        
+        // Mostrar/ocultar navbar al hacer scroll
+        if (currentScroll > 100 && currentScroll > lastScroll && !menuOpen) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        
+        // Efecto parallax en el logo
+        if (logo && currentScroll <= 200) {
+            const scale = 1 - (currentScroll * 0.001);
+            const opacity = 1 - (currentScroll * 0.005);
+            logo.style.transform = `scale(${Math.max(scale, 0.9)})`;
+            logo.style.opacity = Math.max(opacity, 0.8);
+        }
+        
+        // Añadir clase 'scrolled' después de cierto scroll
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    }
+    
+    let lastScroll = 0;
+    window.addEventListener('scroll', handleScroll);
+    
+    // Precarga de imágenes de categorías
+    function preloadCategoryImages() {
+        const categoryPreviews = [
+            'img/categories/women-preview.jpg',
+            'img/categories/men-preview.jpg'
+        ];
+        
+        categoryPreviews.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+    
+    // Inicialización
+    function init() {
+        // updateCartCount(0);
+        // simulateCartUpdate();
+        // preloadCategoryImages();
+        
+        // Configurar vista previa en desktop
+        if (window.innerWidth >= 992 && categoriesMenu && categoryPreview) {
+            categoriesMenu.style.display = 'grid';
+            categoryPreview.style.display = 'block';
+        }
+    }
+    
+    init();
+});</script>
     <footer class="footer-premium">
         <div class="footer-content-premium">
             <div class="social-icons-premium">

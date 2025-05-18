@@ -14,7 +14,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css.css">
+    <!-- <link rel="stylesheet" href="css.css"> -->
     <link rel="preload" href="img/categories/women-preview.jpg" as="image">
     <link rel="preload" href="img/categories/men-preview.jpg" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,145 +23,142 @@
     <link rel="icon" href="Img/logo_alnoan.png" type="image/x-icon">
   </head>
   <body>
-    <!-- Barra de navegación premium -->
+   <!-- Barra de navegación premium -->
     <nav class="navbar">
-      <!-- Logo con efecto hover -->
-      <a href="index.html" class="logo">
-          <span>ALNOAN</span>
-          <div class="logo-hover"></div>
-      </a>
-      
-      <!-- Contenedor de acciones -->
-      <div class="nav-actions">
-          <!-- Buscador mejorado -->
-          <div class="search-container">
-              <button id="search-toggle" class="nav-icon" aria-label="Buscar">
-                  <i class="fas fa-search"></i>
-              </button>
-              <div class="search-box">
-                  <input type="text" placeholder="Buscar productos..." id="search-input">
-                  <button class="search-btn" aria-label="Ejecutar búsqueda">
-                      <i class="fas fa-search"></i>
-                  </button>
-                  <div class="search-suggestions"></div>
-              </div>
-          </div>
-          
-          <!-- Menú de usuario con avatar -->
-          <div class="user-dropdown">
-              <button class="nav-icon user-btn" aria-label="Menú de usuario">
-                  <div class="user-avatar">
-                      <i class="fas fa-user"></i>
-                  </div>
-              </button>
-              <div class="dropdown-content">
-                  <div class="user-info">
-                      <div class="user-avatar"><i class="fas fa-user"></i></div>
-                      <div>
-                          <div class="user-name">Invitado</div>
-                          <div class="user-email">Inicia sesión</div>
-                      </div>
-                  </div>
-                  <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
-                  <a href="#"><i class="fas fa-clipboard-list"></i> Mis pedidos</a>
-                  <a href="#"><i class="fas fa-heart"></i> Favoritos</a>
-                  <a href="#"><i class="fas fa-history"></i> Historial</a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-              </div>
-          </div>
-          
-          <!-- Carrito con notificación -->
-          <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
-              <div class="cart-badge">
-                  <i class="fas fa-shopping-cart"></i>
-                  <span class="cart-count">0</span>
-              </div>
-          </a>
-          
-          <!-- Botón de menú mejorado -->
-          <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal">
-              <div class="menu-icon">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-              </div>
-              <span class="menu-text">Menú</span>
-          </button>
-      </div>
-  </nav>
-  <!-- Menú de categorías mejorado -->
-  <div class="categories-menu" id="categories-menu">
-    <div class="menu-header">
-        <button class="back-btn" id="back-btn" aria-label="Volver">
-            <i class="fas fa-chevron-left"></i>
-            <span>Volver</span>
-        </button>
-        <h3 id="menu-title">Categorías</h3>
-        <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+        <!-- Logo con efecto hover -->
+        <a href="index.html" class="logo" aria-label="Inicio">
+            <span>ALNOAN</span>
+            <div class="logo-hover"></div>
+        </a>
+        <!-- Contenedor de acciones -->
+        <div class="nav-actions">
+            <!-- Buscador mejorado -->
+            <div class="search-container">
+                <button id="search-toggle" class="nav-icon" aria-label="Buscar productos">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar productos..." id="search-input" aria-label="Campo de búsqueda">
+                    <button class="search-btn" aria-label="Ejecutar búsqueda">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-suggestions" aria-live="polite"></div>
+                </div>
+            </div>
+            
+            <!-- Menú de usuario con avatar -->
+            <div class="user-dropdown">
+                <button class="nav-icon user-btn" aria-label="Menú de usuario" aria-expanded="false" aria-controls="user-dropdown-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                </button>
+                <div class="dropdown-content" id="user-dropdown-menu">
+                    <div class="user-info">
+                        <div class="user-avatar"><i class="fas fa-user" aria-hidden="true"></i></div>
+                        <div>
+                            <div class="user-name">Invitado</div>
+                            <div class="user-email">Inicia sesión</div>
+                        </div>
+                    </div>
+                    <a href="#" aria-label="Iniciar sesión"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Iniciar sesión</a>
+                    <a href="#" aria-label="Mis pedidos"><i class="fas fa-clipboard-list" aria-hidden="true"></i> Mis pedidos</a>
+                    <a href="#" aria-label="Favoritos"><i class="fas fa-heart" aria-hidden="true"></i> Favoritos</a>
+                    <a href="#" aria-label="Historial"><i class="fas fa-history" aria-hidden="true"></i> Historial</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" aria-label="Cerrar sesión"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Cerrar sesión</a>
+                </div>
+            </div>
+            
+            <!-- Carrito con notificación -->
+            <a href="carrito.html" class="nav-icon cart-icon" aria-label="Carrito de compras">
+                <div class="cart-badge">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                    <span class="cart-count" aria-live="polite">0</span>
+                </div>
+            </a>
+            
+            <!-- Botón de menú mejorado -->
+            <button id="menu-toggle" class="nav-icon menu-btn" aria-label="Menú principal" aria-expanded="false" aria-controls="categories-menu">
+                <div class="menu-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="menu-text">Menú</span>
+            </button>
+        </div>
+    </nav>
     
-    <div class="menu-content">
-        <!-- Nivel 1: Categorías principales -->
-        <div class="menu-level active" id="level-1">
-            <ul>
-                <li data-category="mujer" data-preview="img/categories/women-preview.jpg">
-                    <a href="#">
-                        <i class="fas fa-female category-icon"></i>
-                        <span>Mujer</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-                <li data-category="hombre" data-preview="img/categories/men-preview.jpg">
-                    <a href="#">
-                        <i class="fas fa-male category-icon"></i>
-                        <span>Hombre</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-                <li data-category="ninos">
-                    <a href="#">
-                        <i class="fas fa-child category-icon"></i>
-                        <span>Niños</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-                <li data-category="ninas">
-                    <a href="#">
-                        <i class="fas fa-child-dress category-icon"></i>
-                        <span>Niñas</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-                <li data-category="adolescentes">
-                    <a href="#">
-                        <i class="fas fa-tshirt category-icon"></i>
-                        <span>Adolescentes</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-            </ul>
+    <!-- Menú de categorías mejorado -->
+    <div class="categories-menu" id="categories-menu" aria-hidden="true">
+        <div class="menu-header">
+            <button class="back-btn" id="back-btn" aria-label="Volver">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                <span>Volver</span>
+            </button>
+            <h3 id="menu-title">Categorías</h3>
+            <button class="close-menu" id="close-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
         </div>
         
-        <!-- Nivel 2: Subcategorías -->
-        <div class="menu-level" id="level-2">
-            <ul id="subcategories-list">
-                <!-- Se llena dinámicamente -->
-            </ul>
+        <div class="menu-content">
+            <!-- Nivel 1: Categorías principales -->
+            <div class="menu-level active" id="level-1" role="menu">
+                <ul>
+                    <li data-category="mujer" data-preview="img/categories/women-preview.jpg" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-female category-icon" aria-hidden="true"></i>
+                            <span>Mujer</span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li data-category="hombre" data-preview="img/categories/men-preview.jpg" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-male category-icon" aria-hidden="true"></i>
+                            <span>Hombre</span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninos" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-child category-icon" aria-hidden="true"></i>
+                            <span>Niños</span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li data-category="ninas" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-female category-icon" aria-hidden="true"></i>
+                            <span>Niñas</span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li data-category="adolescentes" role="none">
+                        <a href="#" role="menuitem">
+                            <i class="fas fa-tshirt category-icon" aria-hidden="true"></i>
+                            <span>Adolescentes</span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Nivel 2: Subcategorías -->
+            <div class="menu-level" id="level-2" role="menu" aria-hidden="true">
+                <ul id="subcategories-list" role="none">
+                    <!-- Se llena dinámicamente -->
+                </ul>
+            </div>
         </div>
+        
+        <!-- Vista previa para desktop -->
+        <div class="category-preview" id="category-preview" aria-hidden="true"></div>
     </div>
     
-    <!-- Vista previa para desktop -->
-    <div class="category-preview" id="category-preview"></div>
-</div>
-
-<!-- Overlay para el menú -->
-<div class="menu-overlay" id="menu-overlay"></div>
-
-<!-- Audio para efectos (oculto) -->
-<audio id="click-sound" src="sounds/click.mp3" preload="auto"></audio>
+    <!-- Overlay para el menú -->
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
     <!-- Barra de navegación -->
     <!-- <nav class="navbar">
       <div class="logo">ALNOAN</div>
