@@ -3,110 +3,494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Carrito de Compras</title>
-    <link rel="stylesheet" href="Css/carrito.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>ALNOAN | Luxury Cart</title>
+    <style>
+        :root {
+            --ivory: #F9FAF5;
+            --stone: #E4E4E4;
+            --slate: #B7BAC3;
+            --royal: #6E77EE;
+            --carbon: #1A1A1A;
+            --spacing: clamp(1rem, 3vw, 3rem);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--ivory);
+            color: var(--carbon);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .luxury-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--spacing);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing);
+        }
+        
+        /* Header de Lujo */
+        .luxury-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: calc(var(--spacing) * 1.5);
+            position: relative;
+        }
+        
+        .luxury-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 350;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--carbon), var(--royal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .luxury-header p {
+            color: var(--slate);
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Tarjetas de Producto - Estilo Galería */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px -12px rgba(110, 119, 238, 0.15);
+        }
+        
+        .gallery-media {
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .gallery-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .gallery-item:hover .gallery-media img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-details {
+            padding: 1.5rem;
+        }
+        
+        .gallery-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--carbon);
+        }
+        
+        .gallery-price {
+            font-size: 1.3rem;
+            font-weight: 450;
+            color: var(--royal);
+            margin-bottom: 1.5rem;
+        }
+        
+        .gallery-add {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--royal);
+            color: var(--royal);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .gallery-add:hover {
+            background: var(--royal);
+            color: white;
+        }
+        
+        /* Carrito Flotante */
+        .luxury-cart {
+            position: sticky;
+            top: var(--spacing);
+            height: fit-content;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--stone);
+        }
+        
+        .cart-header h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        
+        .cart-count {
+            background: var(--royal);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--stone);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--stone);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--slate);
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: var(--stone);
+            color: var(--carbon);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--royal);
+            color: white;
+        }
+        
+        .remove-btn {
+            margin-left: auto;
+            color: var(--slate);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .remove-btn:hover {
+            color: #ff6b6b;
+        }
+        
+        .cart-total {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--stone);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            background: var(--carbon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .checkout-btn:hover {
+            background: var(--royal);
+            transform: translateY(-2px);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .added-pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        /* Micro-interacciones */
+        .cart-item {
+            transition: transform 0.3s;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .luxury-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .luxury-cart {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="cart-container">
-        <div class="cart-header">
-            <h1><i class="fas fa-shopping-cart"></i> Tu Carrito <span class="item-count">(2 productos)</span></h1>
-            <a href="/" class="continue-shopping"><i class="fas fa-arrow-left"></i> Continuar comprando</a>
-        </div>
+    <div class="luxury-container">
+        <header class="luxury-header">
+            <h1>ALNOAN COLLECTION</h1>
+            <p>Diseño atemporal, artesanía excepcional</p>
+        </header>
         
-        <div class="cart-content">
-            <div class="cart-items">
-                <div class="cart-item">
-                    <img src="https://via.placeholder.com/80x80?text=iPhone+15" alt="iPhone 15" class="product-image">
-                    <div class="product-details">
-                        <h3>iPhone 15</h3>
-                        <p class="product-variant"><i class="fas fa-palette"></i> Color: Negro</p>
-                        <div class="quantity-selector">
-                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                            <span class="quantity">1</span>
-                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-price">$999.00</div>
-                    <button class="remove-item"><i class="fas fa-times"></i></button>
-                </div>
-                
-                <div class="cart-item">
-                    <img src="https://via.placeholder.com/80x80?text=AirPods+Pro" alt="AirPods Pro" class="product-image">
-                    <div class="product-details">
-                        <h3>AirPods Pro</h3>
-                        <p class="product-variant"><i class="fas fa-palette"></i> Color: Blanco</p>
-                        <div class="quantity-selector">
-                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                            <span class="quantity">1</span>
-                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-price">$249.00</div>
-                    <button class="remove-item"><i class="fas fa-times"></i></button>
-                </div>
+        <!-- Productos -->
+        <article class="gallery-item">
+            <div class="gallery-media">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Lámpara ALNOAN">
+            </div>
+            <div class="gallery-details">
+                <h3 class="gallery-title">Lámpara Suspensión</h3>
+                <p class="gallery-price">€ 349</p>
+                <button class="gallery-add" onclick="addToCart('Lámpara Suspensión', 349, this)">
+                    <span>Añadir</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14m-7-7h14"></path>
+                    </svg>
+                </button>
+            </div>
+        </article>
+        
+        <article class="gallery-item">
+            <div class="gallery-media">
+                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Reloj ALNOAN">
+            </div>
+            <div class="gallery-details">
+                <h3 class="gallery-title">Reloj Monumento</h3>
+                <p class="gallery-price">€ 890</p>
+                <button class="gallery-add" onclick="addToCart('Reloj Monumento', 890, this)">
+                    <span>Añadir</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14m-7-7h14"></path>
+                    </svg>
+                </button>
+            </div>
+        </article>
+        
+        <article class="gallery-item">
+            <div class="gallery-media">
+                <img src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Sofá ALNOAN">
+            </div>
+            <div class="gallery-details">
+                <h3 class="gallery-title">Sofá Oslo</h3>
+                <p class="gallery-price">€ 2,450</p>
+                <button class="gallery-add" onclick="addToCart('Sofá Oslo', 2450, this)">
+                    <span>Añadir</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14m-7-7h14"></path>
+                    </svg>
+                </button>
+            </div>
+        </article>
+        
+        <!-- Carrito -->
+        <aside class="luxury-cart">
+            <div class="cart-header">
+                <h2>Tu selección</h2>
+                <div class="cart-count" id="cart-count">0</div>
             </div>
             
-            <div class="cart-summary">
-                <h3><i class="fas fa-receipt"></i> Resumen de compra</h3>
-                <div class="discount-section">
-                    <input type="text" placeholder="Ingresa código de descuento">
-                    <button class="apply-btn">Aplicar</button>
-                </div>
-                
-                <div class="summary-details">
-                    <div class="summary-row">
-                        <span>Subtotal (2 productos)</span>
-                        <span>$1,248.00</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Descuento</span>
-                        <span class="discount-value">$0.00</span>
-                    </div>
-                    <div class="summary-row shipping">
-                        <span>Envío</span>
-                        <span>$5.00</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total</span>
-                        <span class="total-value">$1,253.00</span>
-                    </div>
-                </div>
-                
-                <button class="checkout-btn"><i class="fas fa-lock"></i> Pagar ahora</button>
-                
-                <div class="payment-methods">
-                    <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa">
-                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard">
-                    <img src="https://via.placeholder.com/40x25?text=AMEX" alt="American Express">
-                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal">
-                </div>
-                
-                <div class="security-badge">
-                    <i class="fas fa-shield-alt"></i> Compra segura - Tus datos están protegidos
-                </div>
+            <div class="cart-items" id="cart-items">
+                <p style="text-align: center; color: var(--slate); padding: 2rem 0;">Tu carrito está vacío</p>
             </div>
-        </div>
-        
-        <div class="recommendations">
-            <h3><i class="fas fa-lightbulb"></i> También te puede interesar</h3>
-            <div class="recommended-products">
-                <div class="product">
-                    <img src="https://via.placeholder.com/100x100?text=Cargador" alt="Cargador">
-                    <p>Cargador USB-C</p>
-                    <span>$29.99</span>
-                    <button>Añadir</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/100x100?text=Fundas" alt="Fundas">
-                    <p>Funda para iPhone 15</p>
-                    <span>$19.99</span>
-                    <button>Añadir</button>
-                </div>
+            
+            <div class="cart-total">
+                <span>Total</span>
+                <span>€ <span id="cart-total">0</span></span>
             </div>
-        </div>
+            
+            <button class="checkout-btn" id="checkout-btn">
+                <span>Finalizar compra</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-4 4l4-4m-4-4l4 4"></path>
+                </svg>
+            </button>
+        </aside>
     </div>
-    
-    <script src="Js/carrito.js"></script>
+
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price, button) {
+            button.classList.add('added-pulse');
+            setTimeout(() => button.classList.remove('added-pulse'), 500);
+            
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    quantity: 1,
+                    id: Date.now(),
+                    img: button.closest('.gallery-item').querySelector('img').src
+                });
+            }
+            
+            updateCart();
+        }
+        
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const cartCount = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: var(--slate); padding: 2rem 0;">Tu carrito está vacío</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                let total = 0;
+                let count = 0;
+                
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <img src="${item.img}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <p class="cart-item-price">€ ${item.price.toFixed(2)}</p>
+                            <div class="cart-item-actions">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <span class="remove-btn" onclick="removeItem(${item.id})">×</span>
+                            </div>
+                        </div>
+                    `;
+                    cartItems.appendChild(itemElement);
+                    
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+                });
+                
+                cartTotal.textContent = total.toFixed(2);
+                cartCount.textContent = count;
+                checkoutBtn.disabled = false;
+            }
+        }
+        
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    cart = cart.filter(item => item.id !== id);
+                }
+                
+                updateCart();
+            }
+        }
+        
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+        
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                alert(`Compra realizada por €${document.getElementById('cart-total').textContent}\n\nGracias por elegir ALNOAN.`);
+                cart = [];
+                updateCart();
+            }
+        });
+    </script>
 </body>
 </html>
