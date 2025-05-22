@@ -158,7 +158,7 @@
     --border-radius: 8px;
 }
 body {
-    font-family: 'Amarante', system-ui, sans-serif; /*cambie esto */
+    font-family: 'Encode Sans SC', system-ui, sans-serif; /*cambie esto */
     background-color: var(--ghost-white);
     color: var(--text);
     line-height: 1.6;
