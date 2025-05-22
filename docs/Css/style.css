@@ -158,7 +158,7 @@
     --border-radius: 8px;
 }
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Amarante', system-ui, sans-serif; /*cambie esto */
     background-color: var(--ghost-white);
     color: var(--text);
     line-height: 1.6;
@@ -1091,6 +1091,9 @@ body.dark-mode #search-input {
     transition: var(--transition);
     box-shadow: var(--shadow);
     position: relative;
+    display: flex;
+    flex-direction: column; /*agregue los trs ultimo */
+    height: 100%;
   }
   
   .product-card:hover {
@@ -1113,7 +1116,7 @@ body.dark-mode #search-input {
   
   .product-image {
     width: 100%;
-    height: 450px;
+    aspect-ratio: 4/3;
     object-fit: cover;
     transition: var(--transition);
   }
@@ -1206,7 +1209,7 @@ body.dark-mode #search-input {
     border-color: var(--secondary);
     color: var(--secondary);
   }
-  
+
   /* Sección de testimonios */
   .testimonials {
     padding: 5rem 0;
@@ -1217,14 +1220,18 @@ body.dark-mode #search-input {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    align-items: stretch; /*agregue  lo ultimo */
   }
-  
   .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /*agregue los trs primerios */
     background-color: var(--light);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    height: 100%; /*agregue este */
   }
   
   .testimonial-card:hover {
@@ -1260,7 +1267,7 @@ body.dark-mode #search-input {
   }
   
   .testimonial-author img {
-    width: 60px;
+    width: 70px; /*camnie esto*/
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
@@ -1370,6 +1377,8 @@ body.dark-mode #search-input {
   .social-icons {
     display: flex;
     gap: 1rem;
+    margin-top: 10px;
+    flex-wrap: wrap;
   }
   
   .social-icons a {
@@ -1380,9 +1389,10 @@ body.dark-mode #search-input {
     color: var(--light);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /*agregue */
     font-size: 1.2rem;
     transition: var(--transition);
+    box-sizing: border-box; /*agregue */
   }
   
   .social-icons a:hover {
@@ -2107,3 +2117,80 @@ body.dark-mode #search-input {
     font-weight: 700;
     font-size: 1.1rem;
   }
+
+  /* este agregue todo */
+  /* Ajustes responsivos para sección de productos */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .product-card {
+    border-radius: 8px;
+  }
+
+  .product-image {
+    height: 280px;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+  }
+
+  .product-actions button {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image {
+    height: 200px;
+  }
+
+  .product-info {
+    padding: 0.8rem;
+  }
+
+  .product-description {
+    font-size: 0.8rem;
+  }
+
+  .product-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .product-actions button {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+}
+/* Estilo base para rating */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1rem; /* Tamaño base para pantallas grandes */
+  color: gold;
+}
+
+/* En pantallas medianas */
+@media (max-width: 768px) {
+  .rating {
+    font-size: 0.9rem;
+  }
+}
+
+/* En pantallas pequeñas */
+@media (max-width: 480px) {
+  .rating {
+    font-size: 0.8rem;
+  }
+}
