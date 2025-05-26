@@ -1209,6 +1209,36 @@ body.dark-mode #search-input {
     border-color: var(--secondary);
     color: var(--secondary);
   }
+  
+  /* agrgue esto  */
+  .product-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.product-media img,
+.product-media video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.product-media video {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.product-card:hover .product-media video {
+  opacity: 1;
+}
+
+.product-card:hover .product-media img {
+  opacity: 0;
+}
 
   /* Sección de testimonios */
   .testimonials {
@@ -2172,7 +2202,7 @@ body.dark-mode #search-input {
     font-size: 0.8rem;
   }
 }
-/* Estilo base para rating */
+/* para las estrellas */
 .rating {
   display: flex;
   align-items: center;

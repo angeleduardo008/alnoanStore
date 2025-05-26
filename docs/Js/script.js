@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Datos de categorías y subcategorías
     const categoriesData = {
         mujer: ['Trabajo', 'Viaje', 'Deporte', 'Moda', 'Escolar'],
         hombre: ['Sedentarismo', 'Viaje', 'Deporte', 'Trabajo', 'Gimnasio'],
@@ -8,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
         adolescentes: ['Escolar', 'Moda', 'Deporte', 'Tecnología']
     };
     
-    // Elementos del DOM
     const menuToggle = document.getElementById('menu-toggle');
     const categoriesMenu = document.getElementById('categories-menu');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -516,7 +514,6 @@ document.querySelectorAll('.quick-view').forEach(button => {
              });
          });
      });
-
     // Inicialización
     function init() {
         // updateCartCount(0);
